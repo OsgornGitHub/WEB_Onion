@@ -11,44 +11,52 @@ namespace WEB.Repo.Repositories
     public class SimilarRepository : IRepository<Similar>
     {
         private ApplicationContext db;
+        private DbSet<Similar> entities;
 
         public SimilarRepository(ApplicationContext context)
         {
             this.db = context;
+            entities = db.Set<Similar>();
         }
 
         public IEnumerable<Similar> GetAll()
         {
-            return db.Similars;
+            return entities.AsEnumerable();
         }
 
         public Similar Get(Guid id)
         {
-            return db.Similars.Find(id);
+            return entities.SingleOrDefault(s => s.SimilarId == id);
         }
 
         public void Create(Similar similar)
         {
-            db.Similars.Add(similar);
+            if (similar == null)
+            {
+                throw new ArgumentNullException("entity");
+            }
+            entities.Add(similar);
+            db.SaveChanges();
         }
 
         public void Update(Similar similar)
         {
-            db.Entry(similar).State = EntityState.Modified;
+            if (similar == null)
+            {
+                throw new ArgumentNullException("entity");
+            }
+            db.SaveChanges();
         }
 
-        public IEnumerable<Similar> Find(Guid id)
+        public void Delete(Similar similar)
         {
-            return db.Similars.Where(a => a.SimilarId == id).ToList();
+            if (similar == null)
+            {
+                throw new ArgumentNullException("entity");
+            }
+            entities.Remove(similar);
+            db.SaveChanges();
         }
-
-        public void Delete(Guid id)
-        {
-            Similar similar = db.Similars.Find(id);
-            if (similar != null)
-                db.Similars.Remove(similar);
-        }
-
 
         public void SaveChanges()
         {

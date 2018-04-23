@@ -6,10 +6,6 @@ namespace WEB.Repo
     public class ApplicationContext : DbContext
     {
 
-        public DbSet<Artist> Artists { get; set; }
-        public DbSet<Album> Albums { get; set; }
-        public DbSet<Similar> Similars { get; set; }
-        public DbSet<Track> Tracks { get; set; }
 
         public ApplicationContext(DbContextOptions<ApplicationContext> options) : base(options)
         {

@@ -11,44 +11,52 @@ namespace WEB.Repo.Repositories
     public class TrackRepository : IRepository<Track>
     {
         private ApplicationContext db;
+        private DbSet<Track> entities;
 
         public TrackRepository(ApplicationContext context)
         {
             this.db = context;
+            entities = db.Set<Track>();
         }
 
         public IEnumerable<Track> GetAll()
         {
-            return db.Tracks;
+            return entities.AsEnumerable();
         }
 
         public Track Get(Guid id)
         {
-            return db.Tracks.Find(id);
+            return entities.SingleOrDefault(s => s.TrackId == id);
         }
 
         public void Create(Track track)
         {
-            db.Tracks.Add(track);
+            if (track == null)
+            {
+                throw new ArgumentNullException("entity");
+            }
+            entities.Add(track);
+            db.SaveChanges();
         }
 
         public void Update(Track track)
         {
-            db.Entry(track).State = EntityState.Modified;
+            if (track == null)
+            {
+                throw new ArgumentNullException("entity");
+            }
+            db.SaveChanges();
         }
 
-        public IEnumerable<Track> Find(Guid id)
+        public void Delete(Track track)
         {
-            return db.Tracks.Where(a => a.TrackId == id).ToList();
+            if (track == null)
+            {
+                throw new ArgumentNullException("entity");
+            }
+            entities.Remove(track);
+            db.SaveChanges();
         }
-
-        public void Delete(Guid id)
-        {
-            Track track = db.Tracks.Find(id);
-            if (track != null)
-                db.Tracks.Remove(track);
-        }
-
 
         public void SaveChanges()
         {

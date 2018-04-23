@@ -11,42 +11,51 @@ namespace WEB.Repo.Repositories
     public class ArtistRepository : IRepository<Artist>
     {
         private ApplicationContext db;
+        private DbSet<Artist> entities;
 
         public ArtistRepository(ApplicationContext context)
         {
             this.db = context;
+            entities = db.Set<Artist>();
         }
 
         public IEnumerable<Artist> GetAll()
         {
-            return db.Artists;
+            return entities.AsEnumerable();
         }
 
         public Artist Get(Guid id)
         {
-            return db.Artists.Find(id);
+            return entities.SingleOrDefault(s => s.ArtistId == id);
         }
 
         public void Create(Artist artist)
         {
-            db.Artists.Add(artist);
+            if (artist == null)
+            {
+                throw new ArgumentNullException("entity");
+            }
+            entities.Add(artist);
+            db.SaveChanges();
         }
 
         public void Update(Artist artist)
         {
-            db.Entry(artist).State = EntityState.Modified;
+            if (artist == null)
+            {
+                throw new ArgumentNullException("entity");
+            }
+            db.SaveChanges();
         }
 
-        public IEnumerable<Artist> Find(Guid id)
+        public void Delete(Artist artist)
         {
-            return db.Artists.Where(a => a.ArtistId == id).ToList();
-        }
-
-        public void Delete(Guid id)
-        {
-            Artist artist = db.Artists.Find(id);
-            if (artist != null)
-                db.Artists.Remove(artist);
+            if (artist == null)
+            {
+                throw new ArgumentNullException("entity");
+            }
+            entities.Remove(artist);
+            db.SaveChanges();
         }
 
         public void SaveChanges()

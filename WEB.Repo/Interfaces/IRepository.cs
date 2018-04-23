@@ -8,10 +8,9 @@ namespace WEB.Repo.Intarfaces
     {
         IEnumerable<T> GetAll();
         T Get(Guid id);
-        IEnumerable<T> Find(Guid id);
         void Create(T item);
         void Update(T item);
-        void Delete(Guid id);
+        void Delete(T item);
         void SaveChanges();
     }
 }

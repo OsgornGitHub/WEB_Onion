@@ -11,42 +11,51 @@ namespace WEB.Repo.Repositories
     public class AlbumRepository : IRepository<Album>
     {
         private ApplicationContext db;
+        private DbSet<Album> entities;
 
         public AlbumRepository(ApplicationContext context)
         {
             this.db = context;
+            entities = db.Set<Album>();
         }
 
         public IEnumerable<Album> GetAll()
         {
-            return db.Albums;
+            return entities.AsEnumerable();
         }
 
         public Album Get(Guid id)
         {
-            return db.Albums.Find(id);
+            return entities.SingleOrDefault(s => s.AlbumId == id);
         }
 
         public void Create(Album album)
         {
-            db.Albums.Add(album);
+            if (album == null)
+            {
+                throw new ArgumentNullException("entity");
+            }
+            entities.Add(album);
+            db.SaveChanges();
         }
 
         public void Update(Album album)
         {
-            db.Entry(album).State = EntityState.Modified;
+            if (album == null)
+            {
+                throw new ArgumentNullException("entity");
+            }
+            db.SaveChanges();
         }
 
-        public IEnumerable<Album> Find(Guid id)
+        public void Delete(Album album)
         {
-            return db.Albums.Where(a => a.AlbumId == id).ToList();
-        }
-
-        public void Delete(Guid id)
-        {
-            Album album = db.Albums.Find(id);
-            if (album != null)
-                db.Albums.Remove(album);
+            if (album == null)
+            {
+                throw new ArgumentNullException("entity");
+            }
+            entities.Remove(album);
+            db.SaveChanges();
         }
 
 
