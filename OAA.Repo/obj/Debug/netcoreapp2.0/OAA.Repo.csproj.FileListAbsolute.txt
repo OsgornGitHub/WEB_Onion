@@ -32,3 +32,15 @@ C:\Users\a3.savanovich\Desktop\OnionArchitectureApp\OAA.Repo\obj\Debug\netcoreap
 C:\Users\a3.savanovich\Desktop\OnionArchitectureApp\OAA.Repo\obj\Debug\netcoreapp2.0\OAA.Repo.csproj.CopyComplete
 C:\Users\a3.savanovich\Desktop\OnionArchitectureApp\OAA.Repo\obj\Debug\netcoreapp2.0\OAA.Repo.dll
 C:\Users\a3.savanovich\Desktop\OnionArchitectureApp\OAA.Repo\obj\Debug\netcoreapp2.0\OAA.Repo.pdb
+D:\WEB_Onion\OAA.Repo\bin\Debug\netcoreapp2.0\OAA.Repo.deps.json
+D:\WEB_Onion\OAA.Repo\bin\Debug\netcoreapp2.0\OAA.Repo.dll
+D:\WEB_Onion\OAA.Repo\bin\Debug\netcoreapp2.0\OAA.Repo.pdb
+D:\WEB_Onion\OAA.Repo\bin\Debug\netcoreapp2.0\OAA.Data.dll
+D:\WEB_Onion\OAA.Repo\bin\Debug\netcoreapp2.0\OAA.Data.pdb
+D:\WEB_Onion\OAA.Repo\obj\Debug\netcoreapp2.0\OAA.Repo.csprojResolveAssemblyReference.cache
+D:\WEB_Onion\OAA.Repo\obj\Debug\netcoreapp2.0\OAA.Repo.csproj.CoreCompileInputs.cache
+D:\WEB_Onion\OAA.Repo\obj\Debug\netcoreapp2.0\OAA.Repo.AssemblyInfoInputs.cache
+D:\WEB_Onion\OAA.Repo\obj\Debug\netcoreapp2.0\OAA.Repo.AssemblyInfo.cs
+D:\WEB_Onion\OAA.Repo\obj\Debug\netcoreapp2.0\OAA.Repo.csproj.CopyComplete
+D:\WEB_Onion\OAA.Repo\obj\Debug\netcoreapp2.0\OAA.Repo.dll
+D:\WEB_Onion\OAA.Repo\obj\Debug\netcoreapp2.0\OAA.Repo.pdb

@@ -38,3 +38,17 @@ C:\Users\a3.savanovich\Desktop\OnionArchitectureApp\OAA.Service\obj\Debug\netcor
 C:\Users\a3.savanovich\Desktop\OnionArchitectureApp\OAA.Service\obj\Debug\netcoreapp2.0\OAA.Service.csproj.CopyComplete
 C:\Users\a3.savanovich\Desktop\OnionArchitectureApp\OAA.Service\obj\Debug\netcoreapp2.0\OAA.Service.dll
 C:\Users\a3.savanovich\Desktop\OnionArchitectureApp\OAA.Service\obj\Debug\netcoreapp2.0\OAA.Service.pdb
+D:\WEB_Onion\OAA.Service\bin\Debug\netcoreapp2.0\OAA.Service.deps.json
+D:\WEB_Onion\OAA.Service\bin\Debug\netcoreapp2.0\OAA.Service.dll
+D:\WEB_Onion\OAA.Service\bin\Debug\netcoreapp2.0\OAA.Service.pdb
+D:\WEB_Onion\OAA.Service\bin\Debug\netcoreapp2.0\OAA.Data.dll
+D:\WEB_Onion\OAA.Service\bin\Debug\netcoreapp2.0\OAA.Repo.dll
+D:\WEB_Onion\OAA.Service\bin\Debug\netcoreapp2.0\OAA.Data.pdb
+D:\WEB_Onion\OAA.Service\bin\Debug\netcoreapp2.0\OAA.Repo.pdb
+D:\WEB_Onion\OAA.Service\obj\Debug\netcoreapp2.0\OAA.Service.csprojResolveAssemblyReference.cache
+D:\WEB_Onion\OAA.Service\obj\Debug\netcoreapp2.0\OAA.Service.csproj.CoreCompileInputs.cache
+D:\WEB_Onion\OAA.Service\obj\Debug\netcoreapp2.0\OAA.Service.AssemblyInfoInputs.cache
+D:\WEB_Onion\OAA.Service\obj\Debug\netcoreapp2.0\OAA.Service.AssemblyInfo.cs
+D:\WEB_Onion\OAA.Service\obj\Debug\netcoreapp2.0\OAA.Service.csproj.CopyComplete
+D:\WEB_Onion\OAA.Service\obj\Debug\netcoreapp2.0\OAA.Service.dll
+D:\WEB_Onion\OAA.Service\obj\Debug\netcoreapp2.0\OAA.Service.pdb

@@ -25,3 +25,12 @@ C:\Users\a3.savanovich\Desktop\OnionArchitectureApp\OAA.Data\obj\Debug\netcoreap
 C:\Users\a3.savanovich\Desktop\OnionArchitectureApp\OAA.Data\obj\Debug\netcoreapp2.0\OAA.Data.AssemblyInfo.cs
 C:\Users\a3.savanovich\Desktop\OnionArchitectureApp\OAA.Data\obj\Debug\netcoreapp2.0\OAA.Data.dll
 C:\Users\a3.savanovich\Desktop\OnionArchitectureApp\OAA.Data\obj\Debug\netcoreapp2.0\OAA.Data.pdb
+D:\WEB_Onion\OAA.Data\bin\Debug\netcoreapp2.0\OAA.Data.deps.json
+D:\WEB_Onion\OAA.Data\bin\Debug\netcoreapp2.0\OAA.Data.dll
+D:\WEB_Onion\OAA.Data\bin\Debug\netcoreapp2.0\OAA.Data.pdb
+D:\WEB_Onion\OAA.Data\obj\Debug\netcoreapp2.0\OAA.Data.csprojResolveAssemblyReference.cache
+D:\WEB_Onion\OAA.Data\obj\Debug\netcoreapp2.0\OAA.Data.csproj.CoreCompileInputs.cache
+D:\WEB_Onion\OAA.Data\obj\Debug\netcoreapp2.0\OAA.Data.AssemblyInfoInputs.cache
+D:\WEB_Onion\OAA.Data\obj\Debug\netcoreapp2.0\OAA.Data.AssemblyInfo.cs
+D:\WEB_Onion\OAA.Data\obj\Debug\netcoreapp2.0\OAA.Data.dll
+D:\WEB_Onion\OAA.Data\obj\Debug\netcoreapp2.0\OAA.Data.pdb

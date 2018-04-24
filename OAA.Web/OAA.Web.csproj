@@ -5,6 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="bootstrap" Version="4.1.0" />
     <PackageReference Include="Microsoft.AspNetCore.All" Version="2.0.0" />
   </ItemGroup>
 
@@ -16,6 +17,10 @@
     <ProjectReference Include="..\OAA.Data\OAA.Data.csproj" />
     <ProjectReference Include="..\OAA.Repo\OAA.Repo.csproj" />
     <ProjectReference Include="..\OAA.Service\OAA.Service.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="wwwroot\images\" />
   </ItemGroup>
 
 </Project>

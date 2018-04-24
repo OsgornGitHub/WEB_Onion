@@ -10,6 +10,5 @@ namespace OAA.Web.Models
         public Guid ArtistId { get; set; }
         public string Name { get; set; }
         public string Photo { get; set; }
-        public string Biography { get; set; }
     }
 }

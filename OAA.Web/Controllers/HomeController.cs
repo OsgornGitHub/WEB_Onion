@@ -25,21 +25,28 @@ namespace OAA.Web.Controllers
             this.similarService = similarService;
         }
 
-        public IActionResult Index()
+        public IActionResult Index(int page = 1)
         {
-            //for (int i = 0; i < 2; i++)
-            //{
-            //    Artist model = new Artist()
-            //    {
-            //        Name = "qwe",
-            //        Biography = "edsf",
-            //        Photo = "wqewe"
-            //    };
-            //artistService.Create(model);
-            //}
-            IEnumerable<Artist> artists = artistService.GetAll();
+            List<Artist> list = new List<Artist>();
+            var pageNum = page;
+            var count = 24;
+            list = artistService.GetNextPage(pageNum, count);
+            return View(list);
+        }
 
-            return View(artists);
+        [HttpGet]
+        public IActionResult GetJson(int page, int count)
+        {
+            var list = artistService.GetNextPage(page, count);
+            return Json(list);
+        }
+
+        [HttpGet]
+        public IActionResult GetArtist(string name)
+        {
+            Artist artist = artistService.GetArtist(name);         
+            artistService.Create(artist);
+            return View(artist);
         }
 
         //public IActionResult Error()

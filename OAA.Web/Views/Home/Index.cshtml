@@ -1,23 +1,37 @@
-﻿@model IEnumerable<OAA.Data.Artist>
+﻿@model List<OAA.Data.Artist>
 @{
-    ViewData["Title"] = "Home Page";
+    ViewData["Title"] = "Index";
 }
-<div class="container">
-    <table class="table">
-        @foreach (var art in Model)
-        {
+<div class="data">
+    <h2 class="text-center" style="margin: 25px;">TOP Artist</h2>
+    <div style="display: flex; margin: 10px">
+        <h4 style="float: right">Display by: </h4>
+        <button class="12 btn btn-default">12</button>
+        <button class="24 btn btn-default">24</button>
+        <button class="36 btn btn-default">36</button>
+    </div>
+    @*<div style="margin-left: 45%">
+        <button class="previous btn btn-default">Previous</button>
+        <button id="page" class="btn btn-default"></button>
+        <button class="next btn btn-default">Next</button>
+    </div>*@
 
-        <tr>
-            <td>
-                @art.Name
-            </td>
-            <td>
-                @art.Biography
-            </td>
-            <td>
-                @art.Photo
-            </td>
-        </tr>
+    <div class="artist">
+        @foreach (var person in Model)
+        {
+            <a href="http://172.19.0.251:45455/Home/GetArtist?name=@person.Name">
+                <div class="col-md-2">
+                    <img src="@person.Photo" style="width: 100%" />
+                    <h4 class="text-center">@person.Name</h4>
+
+                </div>
+            </a>
+
         }
-    </table>
+    </div>
+    <div style="margin-left: 45%; margin-bottom: 30px; margin-top: 25px">
+        <button class="previous btn btn-default">Previous</button>
+        <button id="page" class="btn btn-default"></button>
+        <button class="next btn btn-default">Next</button>
+    </div>
 </div>
