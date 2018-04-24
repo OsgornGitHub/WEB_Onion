@@ -5,7 +5,7 @@ var countTrack;
 
 function getTracks(name, pageTrack, countTrack) {
     $.ajax({
-        type: "POST",
+        type: "GET",
         url: "/Home/GetTopTracks",
         data: { name: nameArtist, page: pageTrack, count: countTrack },
         dataType: "json",

@@ -7,6 +7,11 @@ namespace OAA.Service.Interfaces
 {
     public interface ITrackService
     {
-        Track GetTrack(Guid id);
+        IEnumerable<Track> GetAll();
+        Track GetFromBd(Guid id);
+        void Create(Track track);
+        void Update(Track track);
+        void Delete(Track track);
+        List<Track> GetTopTracks(string name, int count = 24, int page = 1);
     }
 }

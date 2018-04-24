@@ -17,6 +17,5 @@ namespace OAA.Service.Interfaces
         JObject GetResponse(string url, int page, int count);
         Artist GetArtist(string name);
         JObject GetResponse(string url, string name);
-        string IsValidName(string name);
     }
 }

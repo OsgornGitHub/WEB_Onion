@@ -44,8 +44,8 @@ function loadData(data) {
 
 function getSimilar(name) {
     $.ajax({
-        type: "POST",
-        url: "/Home/GetSimilar",
+        type: "GET",
+        url: "/Home/GetListSimilar",
         data: { name: name },
         dataType: "json",
         success: function (data) { loadData(data, isSimilar); }

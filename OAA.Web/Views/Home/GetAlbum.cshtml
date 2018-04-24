@@ -1,4 +1,4 @@
-﻿@model Album
+﻿@model OAA.Data.Album
 @{
     ViewData["Title"] = "GetAlbum";
 }
@@ -16,7 +16,7 @@
 
 
     <div class="col-md-8" style="padding: 0px; margin: 0px; ">
-        @foreach (var track in Model.Music)
+        @foreach (var track in Model.Tracks)
         {
 
             <h4 class="text-right btn btn-default" style="display: block">@track.Name</h4>

@@ -7,6 +7,11 @@ namespace OAA.Service.Interfaces
 {
     public interface ISimilarService
     {
-        Similar GetSimilar(Guid id);
+        IEnumerable<Similar> GetAll();
+        void Create(Similar similar);
+        void Update(Similar similar);
+        void Delete(Similar similar);
+        Similar GetSimilarBd(Guid id);
+        List<Similar> GetListSimilar(string name);
     }
 }

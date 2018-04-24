@@ -43,12 +43,67 @@ namespace OAA.Web.Controllers
 
         [HttpGet]
         public IActionResult GetArtist(string name)
-        {
-            Artist artist = artistService.GetArtist(name);         
+        {         
+            Artist artist = artistService.GetArtist(name);
             artistService.Create(artist);
             return View(artist);
         }
 
+
+        [HttpGet]
+        public List<Similar> GetListSimilar(string name)
+        {
+            var nameForRequest = IsValidName(name);
+            List<Similar> listSimilar = new List<Similar>();
+            listSimilar = similarService.GetListSimilar(nameForRequest);
+            return listSimilar;
+        }
+
+        public string IsValidName(string name)
+        {
+            var validName = "";
+            if (name.IndexOf(" ") != -1)
+            {
+                var longName = name.Split(" ");
+                for (int i = 0; i < longName.Length; i++)
+                {
+                    if (i != longName.Length - 1)
+                    {
+                        validName += (longName[i] + "+");
+                    }
+                    else
+                    {
+                        validName += longName[i];
+                    }
+
+                }
+                return validName;
+            }
+            return name;
+        }
+
+        [HttpGet]
+        public JsonResult GetTopAlbum(string name, int page, int count)
+        {
+            var nameForRequest = IsValidName(name);
+            dynamic topAlbums = albumService.GetTopAlbum(nameForRequest, page, count);
+            return Json(topAlbums);
+        }
+
+        public List<Track> GetTopTracks(string name, int count = 24, int page = 1)
+        {
+            var nameForRequest = IsValidName(name);
+            return trackService.GetTopTracks(nameForRequest, count, page);
+        }
+
+
+        public IActionResult GetAlbum(string nameArtist, string nameAlbum)
+        {
+            var nameArtistForRequest = IsValidName(nameArtist);
+            var nameAlbumForRequest = IsValidName(nameAlbum);
+            Album album = albumService.GetAlbum(nameArtistForRequest, nameAlbumForRequest);
+            return View(album);
+        }
         //public IActionResult Error()
         //{
         //    return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });

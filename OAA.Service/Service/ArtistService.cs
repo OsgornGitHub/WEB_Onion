@@ -80,9 +80,10 @@ namespace OAA.Service.Service
 
         public Artist GetArtist(string name)
         {
-            var nameForRequest = IsValidName(name);
-            dynamic ResultJson = GetResponse("http://ws.audioscrobbler.com/2.0/?method=artist.getinfo&artist=", nameForRequest);
+            string validName = IsValidName(name);
+            dynamic ResultJson = GetResponse("http://ws.audioscrobbler.com/2.0/?method=artist.getinfo&artist=", validName);
             string bio = ResultJson.artist.bio.content;
+
             string photo = "";
             foreach (dynamic dyn in ResultJson.artist.image)
             {
@@ -100,27 +101,6 @@ namespace OAA.Service.Service
                 Biography = bio
             };
             return artist;
-        }
-
-
-        public JObject GetResponse(string url, int page, int count)
-        {
-            HttpWebRequest tokenRequest = (HttpWebRequest)WebRequest.Create(url + "&limit=" + count + "&page=" + page + "&api_key=" + "1068375741deac644574d04838a37810" + "&format=json");
-            HttpWebResponse tokenResponse = (HttpWebResponse)tokenRequest.GetResponse();
-            string Result = new StreamReader(tokenResponse.GetResponseStream(), Encoding.UTF8).ReadToEnd();
-            Result = Result.Replace("#", "");
-            dynamic ResultJson = JObject.Parse(Result);
-            return ResultJson;
-        }
-
-        public JObject GetResponse(string url, string name)
-        {
-            HttpWebRequest tokenRequest = (HttpWebRequest)WebRequest.Create(url + name + "&api_key=" + "1068375741deac644574d04838a37810" + "&format=json");
-            HttpWebResponse tokenResponse = (HttpWebResponse)tokenRequest.GetResponse();
-            string Result = new StreamReader(tokenResponse.GetResponseStream(), Encoding.UTF8).ReadToEnd();
-            Result = Result.Replace("#", "");
-            dynamic ResultJson = JObject.Parse(Result);
-            return ResultJson;
         }
 
         public string IsValidName(string name)
@@ -146,5 +126,26 @@ namespace OAA.Service.Service
             return name;
         }
 
+        public JObject GetResponse(string url, int page, int count)
+        {
+            HttpWebRequest tokenRequest = (HttpWebRequest)WebRequest.Create(url + "&limit=" + count + "&page=" + page + "&api_key=" + "1068375741deac644574d04838a37810" + "&format=json");
+            HttpWebResponse tokenResponse = (HttpWebResponse)tokenRequest.GetResponse();
+            string Result = new StreamReader(tokenResponse.GetResponseStream(), Encoding.UTF8).ReadToEnd();
+            Result = Result.Replace("#", "");
+            dynamic ResultJson = JObject.Parse(Result);
+            return ResultJson;
+        }
+
+        public JObject GetResponse(string url, string name)
+        {
+            HttpWebRequest tokenRequest = (HttpWebRequest)WebRequest.Create(url + name + "&api_key=" + "1068375741deac644574d04838a37810" + "&format=json");
+            HttpWebResponse tokenResponse = (HttpWebResponse)tokenRequest.GetResponse();
+            string Result = new StreamReader(tokenResponse.GetResponseStream(), Encoding.UTF8).ReadToEnd();
+            Result = Result.Replace("#", "");
+            dynamic ResultJson = JObject.Parse(Result);
+            return ResultJson;
+        }
+
+      
     }
 }
