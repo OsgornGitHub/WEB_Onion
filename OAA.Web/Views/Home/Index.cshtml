@@ -1,0 +1,23 @@
+﻿@model IEnumerable<OAA.Data.Artist>
+@{
+    ViewData["Title"] = "Home Page";
+}
+<div class="container">
+    <table class="table">
+        @foreach (var art in Model)
+        {
+
+        <tr>
+            <td>
+                @art.Name
+            </td>
+            <td>
+                @art.Biography
+            </td>
+            <td>
+                @art.Photo
+            </td>
+        </tr>
+        }
+    </table>
+</div>

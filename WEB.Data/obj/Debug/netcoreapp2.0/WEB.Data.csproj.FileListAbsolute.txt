@@ -1,9 +1,0 @@
-D:\UpdateWeb\WEB.Data\WEB.Data\bin\Debug\netcoreapp2.0\WEB.Data.deps.json
-D:\UpdateWeb\WEB.Data\WEB.Data\bin\Debug\netcoreapp2.0\WEB.Data.dll
-D:\UpdateWeb\WEB.Data\WEB.Data\obj\Debug\netcoreapp2.0\WEB.Data.csprojResolveAssemblyReference.cache
-D:\UpdateWeb\WEB.Data\WEB.Data\obj\Debug\netcoreapp2.0\WEB.Data.csproj.CoreCompileInputs.cache
-D:\UpdateWeb\WEB.Data\WEB.Data\obj\Debug\netcoreapp2.0\WEB.Data.AssemblyInfoInputs.cache
-D:\UpdateWeb\WEB.Data\WEB.Data\obj\Debug\netcoreapp2.0\WEB.Data.AssemblyInfo.cs
-D:\UpdateWeb\WEB.Data\WEB.Data\bin\Debug\netcoreapp2.0\WEB.Data.pdb
-D:\UpdateWeb\WEB.Data\WEB.Data\obj\Debug\netcoreapp2.0\WEB.Data.dll
-D:\UpdateWeb\WEB.Data\WEB.Data\obj\Debug\netcoreapp2.0\WEB.Data.pdb
