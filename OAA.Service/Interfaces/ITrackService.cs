@@ -11,6 +11,7 @@ namespace OAA.Service.Interfaces
         void Create(Track track);
         void Update(Track track);
         void Delete(Track track);
+        void AddTrackFromLast(string nameTrack, string nameArtist, string link);
         List<Track> GetTopTracks(string name, int count = 24, int page = 1);
     }
 }

@@ -69,6 +69,31 @@ namespace OAA.Service.Service
             return topTracks;
         }
 
+        public void AddTrackFromLast(string nameTrack, string nameArtist, string link)
+        {
+            HttpWebRequest tokenRequest = (HttpWebRequest)WebRequest.Create("http://ws.audioscrobbler.com/2.0/?method=track.getInfo&artist=" + nameArtist + "&track=" + nameTrack + "&api_key=" + "1068375741deac644574d04838a37810" + "&format=json");
+            HttpWebResponse tokenResponse = (HttpWebResponse)tokenRequest.GetResponse();
+            string Result = new StreamReader(tokenResponse.GetResponseStream(), Encoding.UTF8).ReadToEnd();
+            dynamic ResultJson = JObject.Parse(Result);
+            var cover = "";
+            foreach (dynamic dyn in ResultJson.track.album.image)
+            {
+                if (dyn.size == "extralarge")
+                {
+                    cover = dyn.text;
+                    break;
+                }
+            }
+            Track track = new Track()
+            {
+                TrackId = Guid.NewGuid(),
+                Name = ResultJson.track.name,
+                Cover = cover,
+                Link = link
+            };
+            Create(track);
+        }
+
         public JObject GetResponse(string url, string name, int page, int count)
         {
             HttpWebRequest tokenRequest = (HttpWebRequest)WebRequest.Create(url + name + "&api_key=" + "1068375741deac644574d04838a37810" + "&limit=" + count + "&page=" + page + "&format=json");
