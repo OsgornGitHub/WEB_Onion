@@ -24,11 +24,6 @@ namespace OAA.Service.Service
             return Database.Albums.GetAll();
         }
 
-        public Album GetFromBd(Guid id)
-        {
-            return Database.Albums.Get(id);
-        }
-
         public void Create(Album album)
         {
             Database.Albums.Create(album);

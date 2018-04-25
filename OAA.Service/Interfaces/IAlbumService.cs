@@ -9,7 +9,6 @@ namespace OAA.Service.Interfaces
     public interface IAlbumService
     {
         IEnumerable<Album> GetAll();
-        Album GetFromBd(Guid id);
         void Create(Album album);
         void Update(Album album);
         void Delete(Album album);

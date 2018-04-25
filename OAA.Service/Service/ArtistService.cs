@@ -25,11 +25,6 @@ namespace OAA.Service.Service
             return Database.Artists.GetAll();
         }
 
-        public Artist GetFromBd(Guid id)
-        {
-            return Database.Artists.Get(id);
-        }
-
         public void Create(Artist artist)
         {
             Database.Artists.Create(artist);

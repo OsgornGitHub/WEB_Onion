@@ -17,10 +17,10 @@ function loadAlbums(data) {
     console.log(data)
     var container = $('div.albums');
     container.html('');
-    if (data != -1) {
+    if (data !== -1) {
         for (var i = 0; i < data.length; i++) {
             var markup = `
-               <a  href="http://localhost:52527/Home/GetAlbum?nameAlbum=${data[i].nameAlbum}&nameArtist=${data[i].nameArtist}">
+               <a  href="http://172.19.0.251:45455/Home/GetAlbum?nameAlbum=${data[i].nameAlbum}&nameArtist=${data[i].nameArtist}">
                     <div class="col-md-2" style="height: 350px">
                         <img src="${data[i].cover}" style="width: 100%" />
                         <h4 class="text-center" style="margin-bottom: 15px">${data[i].nameAlbum}</h4>
@@ -51,7 +51,7 @@ $(document).ready(function () {
 
 
     $('.prev_a').click(function () {
-        if (pageAlbum != 1) {
+        if (pageAlbum !== 1) {
             pageAlbum--;
             getAlbums(name, pageAlbum, countAlbum);
             var div = document.getElementById('page');

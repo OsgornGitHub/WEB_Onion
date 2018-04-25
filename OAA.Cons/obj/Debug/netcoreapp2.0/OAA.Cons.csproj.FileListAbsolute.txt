@@ -1,0 +1,7 @@
+D:\WEB_Onion\OAA.Cons\bin\Debug\netcoreapp2.0\OAA.Cons.deps.json
+D:\WEB_Onion\OAA.Cons\bin\Debug\netcoreapp2.0\OAA.Cons.runtimeconfig.json
+D:\WEB_Onion\OAA.Cons\bin\Debug\netcoreapp2.0\OAA.Cons.runtimeconfig.dev.json
+D:\WEB_Onion\OAA.Cons\bin\Debug\netcoreapp2.0\OAA.Cons.dll
+D:\WEB_Onion\OAA.Cons\obj\Debug\netcoreapp2.0\OAA.Cons.csproj.CoreCompileInputs.cache
+D:\WEB_Onion\OAA.Cons\obj\Debug\netcoreapp2.0\OAA.Cons.AssemblyInfoInputs.cache
+D:\WEB_Onion\OAA.Cons\obj\Debug\netcoreapp2.0\OAA.Cons.AssemblyInfo.cs

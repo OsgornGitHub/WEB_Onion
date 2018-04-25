@@ -11,9 +11,9 @@ namespace OAA.Data
         public ArtistMap(EntityTypeBuilder<Artist> entityBuilder)
         {
             entityBuilder.HasKey(t => t.ArtistId);
-            entityBuilder.Property(t => t.Name).IsRequired();
-            entityBuilder.Property(t => t.Biography).IsRequired();
-            entityBuilder.Property(t => t.Photo).IsRequired();
+            entityBuilder.Property(t => t.Name);
+            entityBuilder.Property(t => t.Biography);
+            entityBuilder.Property(t => t.Photo);
         }
     }
 }

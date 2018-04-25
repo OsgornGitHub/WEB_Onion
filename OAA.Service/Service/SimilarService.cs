@@ -24,11 +24,6 @@ namespace OAA.Service.Service
             return Database.Similars.Get(id);
         }
 
-        public IEnumerable<Similar> GetAll()
-        {
-            return Database.Similars.GetAll();
-        }
-
         public void Create(Similar similars)
         {
             Database.Similars.Create(similars);

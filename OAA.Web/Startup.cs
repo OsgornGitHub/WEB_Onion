@@ -28,7 +28,7 @@ namespace OAA.Web
             services.AddMvc();
             services.AddTransient<IUnitOfWork, UnitOfWork>();
 
-            services.AddDbContext<ApplicationContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"), b => b.MigrationsAssembly("OAA.Web")));
+            services.AddDbContext<ApplicationContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"), b => b.MigrationsAssembly("OAA.Data")));
 
             //services.AddScoped(typeof(IRepository<Artist>), typeof(ArtistRepository));
             //services.AddScoped(typeof(IRepository<Album>), typeof(AlbumRepository));

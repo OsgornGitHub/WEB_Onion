@@ -5,7 +5,7 @@
 <div class="data">
     <h2 class="text-center" style="margin: 25px;">TOP Artist</h2>
     <div style="display: flex; margin: 10px">
-        <h4 style="float: right">Display by: </h4>
+        <h5 style="float: right">Display by:    </h5>
         <button class="12 btn btn-default">12</button>
         <button class="24 btn btn-default">24</button>
         <button class="36 btn btn-default">36</button>
@@ -15,6 +15,7 @@
         <button id="page" class="btn btn-default"></button>
         <button class="next btn btn-default">Next</button>
     </div>*@
+
 
     <div class="artist">
         @foreach (var person in Model)
@@ -31,7 +32,20 @@
     </div>
     <div style="margin-left: 45%; margin-bottom: 30px; margin-top: 25px">
         <button class="previous btn btn-default">Previous</button>
+
+
+        @*<button id="page_prev" class="page1 btn btn-default"></button>*@
         <button id="page" class="btn btn-default"></button>
+        @*<button id="page_next" class="page2 btn btn-default"></button>*@
+
         <button class="next btn btn-default">Next</button>
+
+        <div style="float: right; display: flex; margin-right: 10%">
+            @*<h5>Let's go to:</h5>
+            <input id="input" class="btn btn-default" style="width: 100px;">
+            <button class="go btn btn-default">Go</button>*@
+        </div>
+
+
     </div>
 </div>

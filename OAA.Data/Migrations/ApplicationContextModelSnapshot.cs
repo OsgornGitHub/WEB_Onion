@@ -27,14 +27,11 @@ namespace OAA.Data.Migrations
 
                     b.Property<Guid>("ArtistId");
 
-                    b.Property<string>("Cover")
-                        .IsRequired();
+                    b.Property<string>("Cover");
 
-                    b.Property<string>("NameAlbum")
-                        .IsRequired();
+                    b.Property<string>("NameAlbum");
 
-                    b.Property<string>("NameArtist")
-                        .IsRequired();
+                    b.Property<string>("NameArtist");
 
                     b.HasKey("AlbumId");
 
@@ -48,14 +45,11 @@ namespace OAA.Data.Migrations
                     b.Property<Guid>("ArtistId")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<string>("Biography")
-                        .IsRequired();
+                    b.Property<string>("Biography");
 
-                    b.Property<string>("Name")
-                        .IsRequired();
+                    b.Property<string>("Name");
 
-                    b.Property<string>("Photo")
-                        .IsRequired();
+                    b.Property<string>("Photo");
 
                     b.HasKey("ArtistId");
 
@@ -69,11 +63,9 @@ namespace OAA.Data.Migrations
 
                     b.Property<Guid>("ArtistId");
 
-                    b.Property<string>("Name")
-                        .IsRequired();
+                    b.Property<string>("Name");
 
-                    b.Property<string>("Photo")
-                        .IsRequired();
+                    b.Property<string>("Photo");
 
                     b.HasKey("SimilarId");
 
@@ -84,20 +76,20 @@ namespace OAA.Data.Migrations
 
             modelBuilder.Entity("OAA.Data.Track", b =>
                 {
-                    b.Property<Guid>("TrackId");
+                    b.Property<Guid>("TrackId")
+                        .ValueGeneratedOnAdd();
 
                     b.Property<Guid>("AlbumId");
 
-                    b.Property<string>("Cover")
-                        .IsRequired();
+                    b.Property<string>("Cover");
 
-                    b.Property<string>("Link")
-                        .IsRequired();
+                    b.Property<string>("Link");
 
-                    b.Property<string>("Name")
-                        .IsRequired();
+                    b.Property<string>("Name");
 
                     b.HasKey("TrackId");
+
+                    b.HasIndex("AlbumId");
 
                     b.ToTable("Track");
                 });
@@ -122,7 +114,7 @@ namespace OAA.Data.Migrations
                 {
                     b.HasOne("OAA.Data.Album", "Album")
                         .WithMany("Tracks")
-                        .HasForeignKey("TrackId")
+                        .HasForeignKey("AlbumId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 #pragma warning restore 612, 618

@@ -24,11 +24,6 @@ namespace OAA.Service.Service
             return Database.Tracks.GetAll();
         }
 
-        public Track GetFromBd(Guid id)
-        {
-            return Database.Tracks.Get(id);
-        }
-
         public void Create(Track track)
         {
             Database.Tracks.Create(track);

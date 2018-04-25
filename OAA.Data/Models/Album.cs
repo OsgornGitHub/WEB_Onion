@@ -14,6 +14,6 @@ namespace OAA.Data
         public Guid ArtistId { get; set; }
         public virtual Artist Artist { get; set; }
 
-        public List<Track> Tracks { get; set; }
+        public ICollection<Track> Tracks { get; set; }
     }
 }

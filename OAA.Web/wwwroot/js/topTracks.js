@@ -17,7 +17,7 @@ function loadTracks(data) {
     console.log(data)
     var container = $('div.tracks');
     container.html('');
-    if (data != -1) {
+    if (data !== -1) {
         for (var i = 0; i < data.length; i++) {
             var markup = ` 
                     <div class="col-md-10" style="width: 100%">
@@ -25,7 +25,7 @@ function loadTracks(data) {
                     </div>
 
             `;
-            if (data[i].link != null) {
+            if (data[i].link !== null) {
                 markup += `
                         <div class="col-md-2">
                                 <a href=${data[i].link}><h5 class="text-center" style="cursor: pointer">Download<span  class="glyphicon glyphicon-floppy-disk"></span></h5></a>
@@ -55,7 +55,7 @@ $(document).ready(function () {
 
 
     $('.prev_a').click(function () {
-        if (pageTrack != 1) {
+        if (pageTrack !== 1) {
             pageTrack--;
             getTracks(name, pageTrack, countTrack);
             var div = document.getElementById('page');

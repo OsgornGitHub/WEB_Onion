@@ -6,7 +6,7 @@ console.log(pageNum);
 function getJson(page, count) {
     $.ajax({
         type: "GET",
-        url: "Home/GetJson",
+        url: "Home/GetTopArtistJson",
         data: { page: pageNum, count: count },
         dataType: "json",
         success: function (data) { loadData(data); }
@@ -29,7 +29,7 @@ function loadData(data) {
         for (var i = 0; i < data.length; i++) {
             var markup =
                 `
-            <a ` + similar + ` href="http://localhost:52527/Home/GetArtist?name=${data[i].name}">
+            <a ` + similar + ` href="http://172.19.0.251:45455/Home/GetArtist?name=${data[i].name}">
                 <div class="col-md-2">
                     <img src="${data[i].photo}" style="width: 100%" />
                     <h4 class="text-center">${data[i].name}</h4>
@@ -39,7 +39,7 @@ function loadData(data) {
             container.append(markup);
         }
     }
-    window.history.pushState("http://localhost:52527/Home/Index/?page=", "Index", "http://localhost:52527/Home/Index/?page=" + pageNum);
+    //window.history.pushState("http://172.19.0.251:45455/Home/Index/?page=", "Index", "http://172.19.0.251:45455/Home/Index/?page=" + pageNum);
 }
 
 function getSimilar(name) {
@@ -54,9 +54,28 @@ function getSimilar(name) {
 
 $(document).ready(function () {
     var div = document.getElementById('page');
+    //var div_1 = document.getElementById('page_prev');
+    //var div_2 = document.getElementById('page_next');
+    //console.log(pageNum);
+
     console.log(pageNum);
     div.innerHTML = pageNum + "";
+    //if (pageNum != 1) {
+    //    div_1.innerHTML = pageNum - 1 + "";
+    //}
+    //div_2.innerHTML = pageNum + 1 + "";
 
+
+    //$('.go').click(function () {
+    //    var input = document.getElementById('input').value;
+    //    pageNum = input;
+    //    getJson(pageNum, count);
+    //    var div = document.getElementById('page');
+    //    div.innerHTML = pageNum + "";
+    //    //div_1.innerHTML = pageNum - 1 + "";
+    //    //div_2.innerHTML = pageNum + 1 + "";
+    //    console.log(pageNum);
+    //});
 
     $('.next').click(function () {
         isSimilar = false;
@@ -64,6 +83,8 @@ $(document).ready(function () {
         getJson(pageNum, count);
         var div = document.getElementById('page');
         div.innerHTML = pageNum + "";
+        //div_1.innerHTML = pageNum - 1 + "";
+        //div_2.innerHTML = pageNum + 1 + "";
         console.log(pageNum);
     })
 
@@ -74,7 +95,11 @@ $(document).ready(function () {
             pageNum--;
             getJson(pageNum, count);
             var div = document.getElementById('page');
-                div.innerHTML = pageNum  + "";
+            div.innerHTML = pageNum + "";
+            //if (pageNum != 1) {
+            //    div_1.innerHTML = pageNum - 1 + "";
+            //}
+            //div_2.innerHTML = pageNum + 1 + "";
 
             console.log(pageNum);
         }
@@ -94,6 +119,10 @@ $(document).ready(function () {
         count = 12;
         getJson(pageNum, count);
         div.innerHTML = pageNum + "";
+        //if (pageNum != 1) {
+        //    div_1.innerHTML = pageNum - 1 + "";
+        //}
+        //div_2.innerHTML = pageNum + 1 + "";
     })
 
     $('.24').click(function () {
@@ -102,6 +131,10 @@ $(document).ready(function () {
         count = 24;
         getJson(pageNum, count);
         div.innerHTML = pageNum + "";
+        //if (pageNum != 1) {
+        //    div_1.innerHTML = pageNum - 1 + "";
+        //}
+        //div_2.innerHTML = pageNum + 1 + "";
     })
 
     $('.36').click(function () {
@@ -110,6 +143,10 @@ $(document).ready(function () {
         count = 36;
         getJson(pageNum, count);
         div.innerHTML = pageNum + "";
+        //if (pageNum != 1) {
+        //    div_1.innerHTML = pageNum - 1 + "";
+        //}
+        //div_2.innerHTML = pageNum + 1 + "";
     })
 
     $('.sim').click(function () {

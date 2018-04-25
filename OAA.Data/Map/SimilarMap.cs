@@ -9,9 +9,9 @@ namespace OAA.Data
     {
         public SimilarMap(EntityTypeBuilder<Similar> entityBuilder)
         {
-            entityBuilder.Property(t => t.Name).IsRequired();
-            entityBuilder.Property(t => t.Photo).IsRequired();
-            entityBuilder.Property(t => t.SimilarId).IsRequired();
+            entityBuilder.Property(t => t.Name);
+            entityBuilder.Property(t => t.Photo);
+            entityBuilder.Property(t => t.SimilarId);
             entityBuilder.HasOne(i => i.Artist).WithMany(i => i.Similars).HasForeignKey(i => i.ArtistId);
         }
     }

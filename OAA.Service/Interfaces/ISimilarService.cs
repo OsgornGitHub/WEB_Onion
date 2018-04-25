@@ -11,7 +11,6 @@ namespace OAA.Service.Interfaces
         void Create(Similar similar);
         void Update(Similar similar);
         void Delete(Similar similar);
-        Similar GetSimilarBd(Guid id);
         List<Similar> GetListSimilar(string name);
     }
 }
