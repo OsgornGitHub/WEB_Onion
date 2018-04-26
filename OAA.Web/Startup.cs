@@ -30,10 +30,6 @@ namespace OAA.Web
 
             services.AddDbContext<ApplicationContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"), b => b.MigrationsAssembly("OAA.Data")));
 
-            //services.AddScoped(typeof(IRepository<Artist>), typeof(ArtistRepository));
-            //services.AddScoped(typeof(IRepository<Album>), typeof(AlbumRepository));
-            //services.AddScoped(typeof(IRepository<Similar>), typeof(SimilarRepository));
-            //services.AddScoped(typeof(IRepository<Track>), typeof(TrackRepository));
             services.AddTransient<IArtistService, ArtistService>();
             services.AddTransient<IAlbumService, AlbumService>();
             services.AddTransient<ITrackService, TrackService>();

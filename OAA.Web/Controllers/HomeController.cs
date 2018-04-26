@@ -54,7 +54,7 @@ namespace OAA.Web.Controllers
         [HttpGet]
         public IActionResult GetListSimilar(string name)
         {
-            var nameForRequest = IsValidName(name);
+            var nameForRequest = name.Replace(" ", "+");
             if (artistService.GetAll().FirstOrDefault(a => a.Name == name).Similars != null)
             {
                 return Ok(artistService.GetAll().FirstOrDefault(a => a.Name == name).Similars);
@@ -76,29 +76,6 @@ namespace OAA.Web.Controllers
             return Ok(listModel);
         }
 
-        public string IsValidName(string name)
-        {
-            var validName = "";
-            if (name.IndexOf(" ") != -1)
-            {
-                var longName = name.Split(" ");
-                for (int i = 0; i < longName.Length; i++)
-                {
-                    if (i != longName.Length - 1)
-                    {
-                        validName += (longName[i] + "+");
-                    }
-                    else
-                    {
-                        validName += longName[i];
-                    }
-
-                }
-                return validName;
-            }
-            return name;
-        }
-
         [HttpGet]
         public IActionResult GetTopAlbum(string name, int page, int count)
         {
@@ -108,7 +85,7 @@ namespace OAA.Web.Controllers
             {
                 return Ok(artistService.GetAll().FirstOrDefault(a => a.Name == name).Albums);
             }
-            var nameForRequest = IsValidName(name);
+            var nameForRequest = name.Replace(" ", "+");
             topAlbums = albumService.GetTopAlbum(nameForRequest, page, count);
             foreach (var alb in topAlbums)
             {
@@ -127,7 +104,7 @@ namespace OAA.Web.Controllers
 
         public List<Track> GetTopTracks(string name, int count = 24, int page = 1)
         {
-            var nameForRequest = IsValidName(name);
+            var nameForRequest = name.Replace(" ", "+");
             return trackService.GetTopTracks(nameForRequest, count, page);
         }
 
@@ -135,12 +112,13 @@ namespace OAA.Web.Controllers
         public IActionResult GetAlbum(string nameArtist, string nameAlbum)
         {
 
-            if(albumService.GetAll().FirstOrDefault(a => a.NameAlbum == nameAlbum) != null)
-            {
-                return View(albumService.GetAll().FirstOrDefault(a => a.NameAlbum == nameAlbum));
-            }
-            var nameArtistForRequest = IsValidName(nameArtist);
-            var nameAlbumForRequest = IsValidName(nameAlbum);
+            //if (albumService.GetAll().FirstOrDefault(a => a.NameAlbum == nameAlbum).NameArtist == nameArtist)
+            //{
+            //    Album alb = albumService.GetAll().Where(a => a.NameAlbum == nameAlbum).FirstOrDefault(b => b.NameArtist == nameArtist);
+            //    return View(alb);
+            //}
+            var nameArtistForRequest = nameArtist.Replace(" ", "+");
+            var nameAlbumForRequest = nameAlbum.Replace(" ", "+");
             Album album = albumService.GetAlbum(nameArtistForRequest, nameAlbumForRequest);
             var artistId = artistService.GetAll().FirstOrDefault(a => a.Name == nameArtist).ArtistId;
             foreach(Track track in album.Tracks)
@@ -152,6 +130,11 @@ namespace OAA.Web.Controllers
             albumService.Create(album);
 
             return View(album);
+        }
+
+        public IActionResult GetCountPageTopArtist(int page, int count)
+        {
+            return Ok(artistService.GetCountPageTopArtist(page, count));
         }
         //public IActionResult Error()
         //{

@@ -19,9 +19,9 @@ namespace OAA.Service.Service
             Database = uow;
         }
 
-        public Similar GetSimilarBd(Guid id)
+        public IEnumerable<Similar> GetAll()
         {
-            return Database.Similars.Get(id);
+            return Database.Similars.GetAll();
         }
 
         public void Create(Similar similars)
@@ -73,11 +73,10 @@ namespace OAA.Service.Service
         {
             HttpWebRequest tokenRequest = (HttpWebRequest)WebRequest.Create(url + name + "&api_key=" + "1068375741deac644574d04838a37810" + "&limit=" + count + "&page=" + page + "&format=json");
             HttpWebResponse tokenResponse = (HttpWebResponse)tokenRequest.GetResponse();
-            string Result = new StreamReader(tokenResponse.GetResponseStream(), Encoding.UTF8).ReadToEnd();
-            Result = Result.Replace("#", "");
-            dynamic ResultJson = JObject.Parse(Result);
-            return ResultJson;
+            string result = new StreamReader(tokenResponse.GetResponseStream(), Encoding.UTF8).ReadToEnd();
+            result = result.Replace("#", "");
+            JObject resultJson = JObject.Parse(result);
+            return resultJson;
         }
-
     }
 }

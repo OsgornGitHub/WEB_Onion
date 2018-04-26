@@ -7,6 +7,7 @@
 
   <ItemGroup>
     <PackageReference Include="EntityFramework" Version="6.2.0" />
+    <PackageReference Include="Taglib-Sharp-NetStandard" Version="1.0.0" />
   </ItemGroup>
 
   <ItemGroup>

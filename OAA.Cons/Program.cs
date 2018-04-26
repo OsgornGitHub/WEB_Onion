@@ -1,4 +1,5 @@
-﻿using System;
+﻿using OAA.Service.Interfaces;
+using System;
 
 namespace OAA.Cons
 {
@@ -6,7 +7,7 @@ namespace OAA.Cons
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+                   
         }
     }
 }

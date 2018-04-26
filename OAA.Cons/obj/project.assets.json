@@ -905,6 +905,15 @@
           "ref/netstandard1.3/System.Threading.Tasks.dll": {}
         }
       },
+      "Taglib-Sharp-NetStandard/1.0.0": {
+        "type": "package",
+        "compile": {
+          "lib/netstandard1.3/TagLib.NetStandard.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard1.3/TagLib.NetStandard.dll": {}
+        }
+      },
       "OAA.Data/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v2.0",
@@ -3466,6 +3475,16 @@
         "system.threading.tasks.nuspec"
       ]
     },
+    "Taglib-Sharp-NetStandard/1.0.0": {
+      "sha512": "e5px+GXQXExu3WTt+HHu/XI0cDv8mkrz5TK9WvzI9cqw5k7tikAZCwbPJvRyxDqQwhlTgNKyy92Dwud2y+nTVA==",
+      "type": "package",
+      "path": "taglib-sharp-netstandard/1.0.0",
+      "files": [
+        "lib/netstandard1.3/TagLib.NetStandard.dll",
+        "taglib-sharp-netstandard.1.0.0.nupkg.sha512",
+        "taglib-sharp-netstandard.nuspec"
+      ]
+    },
     "OAA.Data/1.0.0": {
       "type": "project",
       "path": "../OAA.Data/OAA.Data.csproj",
@@ -3486,7 +3505,8 @@
     ".NETCoreApp,Version=v2.0": [
       "EntityFramework >= 6.2.0",
       "Microsoft.NETCore.App >= 2.0.0",
-      "OAA.Service >= 1.0.0"
+      "OAA.Service >= 1.0.0",
+      "Taglib-Sharp-NetStandard >= 1.0.0"
     ]
   },
   "packageFolders": {
@@ -3546,6 +3566,10 @@
             "target": "Package",
             "version": "[2.0.0, )",
             "autoReferenced": true
+          },
+          "Taglib-Sharp-NetStandard": {
+            "target": "Package",
+            "version": "[1.0.0, )"
           }
         },
         "imports": [

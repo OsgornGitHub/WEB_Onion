@@ -67,11 +67,9 @@ namespace OAA.Service.Service
                         NameArtist = name,
                         Cover = cover
                     };
-                    //db.Albums.Add(album);
                     topAlbums.Add(album);
-                    //db.SaveChanges();
+
                 }
-                //else topAlbums.Add(GetOneTopAlbum(name, page, count));
             }
             return topAlbums;
         }
@@ -89,10 +87,10 @@ namespace OAA.Service.Service
         {
             HttpWebRequest tokenRequest = (HttpWebRequest)WebRequest.Create(url + name + "&api_key=" + "1068375741deac644574d04838a37810" + "&limit=" + count + "&page=" + page + "&format=json");
             HttpWebResponse tokenResponse = (HttpWebResponse)tokenRequest.GetResponse();
-            string Result = new StreamReader(tokenResponse.GetResponseStream(), Encoding.UTF8).ReadToEnd();
-            Result = Result.Replace("#", "");
-            dynamic ResultJson = JObject.Parse(Result);
-            return ResultJson;
+            string result = new StreamReader(tokenResponse.GetResponseStream(), Encoding.UTF8).ReadToEnd();
+            result = result.Replace("#", "");
+            JObject resultJson = JObject.Parse(result);
+            return resultJson;
         }
 
         public Album GetAlbum(string nameArtist, string nameAlbum)
@@ -128,7 +126,7 @@ namespace OAA.Service.Service
                 Cover = image,
                 Tracks = tracks
             };
-           
+
             return album;
         }
 
@@ -136,10 +134,10 @@ namespace OAA.Service.Service
         {
             HttpWebRequest tokenRequest = (HttpWebRequest)WebRequest.Create(url + nameArtist + "&album=" + nameAlbum + "&api_key=" + "1068375741deac644574d04838a37810" + "&format=json");
             HttpWebResponse tokenResponse = (HttpWebResponse)tokenRequest.GetResponse();
-            string Result = new StreamReader(tokenResponse.GetResponseStream(), Encoding.UTF8).ReadToEnd();
-            Result = Result.Replace("#", "");
-            dynamic ResultJson = JObject.Parse(Result);
-            return ResultJson;
+            string result = new StreamReader(tokenResponse.GetResponseStream(), Encoding.UTF8).ReadToEnd();
+            result = result.Replace("#", "");
+            JObject resultJson = JObject.Parse(result);
+            return resultJson;
         }
 
     }

@@ -1,5 +1,6 @@
 ﻿using OAA.Data;
 using OAA.Service.Interfaces;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 
@@ -16,37 +17,24 @@ namespace OAA.Cons
             this.albumService = albumService;
         }
 
-        public string Search(string nameTrack, string nameArtist)
+        public void Search()
         {
-            var nameT = IsValidName(nameTrack);
-            var nameA = IsValidName(nameArtist);
-            string searchParameter = nameT + "_" + nameA + ".mp3";
-            string[] filenames = Directory.GetFiles("D:\\WEB_Onion\\Tracks");
-            foreach (string name in filenames)
+            string[] filenames = Directory.GetFiles("D:\\WEB_Onion\\Tracks", ".mp3", SearchOption.AllDirectories);
+            foreach(var track in filenames)
             {
-                if (name == searchParameter)
+                // nameTrack_nameArtist.mp3
+                var nameTrack = "";
+                var nameArtist = "";
+                var splited = track.Split("_");
+                nameTrack = splited[0];
+                nameArtist = splited[1].Replace(".mp3", "");
+                if (albumService.GetAll().FirstOrDefault(a => a.NameArtist == nameArtist).Tracks.FirstOrDefault(t => t.Name == nameTrack) != null)
                 {
-                    return name;
+                    AddLinkToDb(nameTrack, nameArtist, track);
                 }
-            }
-            return "";
+                else trackService.AddTrackFromLast(nameTrack, nameArtist, track);
+            } 
         }
-
-        public void Result(string link)
-        {
-            var nameTrack = "";
-            var nameArtist = "";
-            var splited = link.Split("_");
-            nameTrack = splited[0];
-            nameArtist = splited[1];
-            if (Search(nameTrack, nameArtist) != "" || albumService.GetAll().FirstOrDefault(a => a.NameArtist == nameArtist).Tracks.FirstOrDefault(t => t.Name == nameTrack) != null)
-            {
-                AddLinkToDb(nameTrack, nameArtist, Search(nameTrack, nameArtist));
-            }
-            else trackService.AddTrackFromLast(nameTrack, nameArtist, link);
-        }
-
-
 
         public void AddLinkToDb(string nameTrack, string nameArtist, string link)
         {

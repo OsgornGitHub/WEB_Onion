@@ -1,13 +1,40 @@
 ﻿var pageNum = 1;
 var count = 24;
+var totalPage = 416;
 var isSimilar = false;
 console.log(pageNum);
 
-function getJson(page, count) {
+
+$(function () {
+    window.pagObj = $('#pagination').twbsPagination({
+        totalPages: totalPage,
+        visiblePages: 10,
+        onPageClick: function (event, page) {
+            console.info(page + ' (from options)');
+            window.history.pushState("", "Index", "?page=" + page);
+        }
+    }).on('page', function (event, page) {
+        console.log(page);
+        getTopArtistJson(page, count)
+    });
+});
+
+
+function getCountPageTopArtist(count) {
+    $.ajax({
+        type: "GET",
+        url: "Home/GetCountPageTopArtist",
+        data: { page: 1, count: count },
+        dataType: "json",
+        success: function (data) { return data }
+    });
+}
+
+function getTopArtistJson(page, count) {
     $.ajax({
         type: "GET",
         url: "Home/GetTopArtistJson",
-        data: { page: pageNum, count: count },
+        data: { page: page, count: count },
         dataType: "json",
         success: function (data) { loadData(data); }
     });
@@ -29,7 +56,7 @@ function loadData(data) {
         for (var i = 0; i < data.length; i++) {
             var markup =
                 `
-            <a ` + similar + ` href="http://172.19.0.251:45455/Home/GetArtist?name=${data[i].name}">
+            <a ` + similar + ` href="/Home/GetArtist?name=${data[i].name}">
                 <div class="col-md-2">
                     <img src="${data[i].photo}" style="width: 100%" />
                     <h4 class="text-center">${data[i].name}</h4>
@@ -39,7 +66,6 @@ function loadData(data) {
             container.append(markup);
         }
     }
-    //window.history.pushState("http://172.19.0.251:45455/Home/Index/?page=", "Index", "http://172.19.0.251:45455/Home/Index/?page=" + pageNum);
 }
 
 function getSimilar(name) {
@@ -52,58 +78,9 @@ function getSimilar(name) {
     });
 }
 
+
 $(document).ready(function () {
     var div = document.getElementById('page');
-    //var div_1 = document.getElementById('page_prev');
-    //var div_2 = document.getElementById('page_next');
-    //console.log(pageNum);
-
-    console.log(pageNum);
-    div.innerHTML = pageNum + "";
-    //if (pageNum != 1) {
-    //    div_1.innerHTML = pageNum - 1 + "";
-    //}
-    //div_2.innerHTML = pageNum + 1 + "";
-
-
-    //$('.go').click(function () {
-    //    var input = document.getElementById('input').value;
-    //    pageNum = input;
-    //    getJson(pageNum, count);
-    //    var div = document.getElementById('page');
-    //    div.innerHTML = pageNum + "";
-    //    //div_1.innerHTML = pageNum - 1 + "";
-    //    //div_2.innerHTML = pageNum + 1 + "";
-    //    console.log(pageNum);
-    //});
-
-    $('.next').click(function () {
-        isSimilar = false;
-        pageNum++;
-        getJson(pageNum, count);
-        var div = document.getElementById('page');
-        div.innerHTML = pageNum + "";
-        //div_1.innerHTML = pageNum - 1 + "";
-        //div_2.innerHTML = pageNum + 1 + "";
-        console.log(pageNum);
-    })
-
-
-    $('.previous').click(function () {
-        isSimilar = false;
-        if (pageNum !== 1) {
-            pageNum--;
-            getJson(pageNum, count);
-            var div = document.getElementById('page');
-            div.innerHTML = pageNum + "";
-            //if (pageNum != 1) {
-            //    div_1.innerHTML = pageNum - 1 + "";
-            //}
-            //div_2.innerHTML = pageNum + 1 + "";
-
-            console.log(pageNum);
-        }
-    })
 
     $('.similar').click(function () {
         var name = document.getElementById('name').innerText;
@@ -115,38 +92,29 @@ $(document).ready(function () {
 
     $('.12').click(function () {
         isSimilar = false;
-        pageNum = 1;
+        page = 1;
         count = 12;
-        getJson(pageNum, count);
+        getTopArtistJson(pageNum, count);
         div.innerHTML = pageNum + "";
-        //if (pageNum != 1) {
-        //    div_1.innerHTML = pageNum - 1 + "";
-        //}
-        //div_2.innerHTML = pageNum + 1 + "";
+
     })
 
     $('.24').click(function () {
         isSimilar = false;
-        pageNum = 1;
+        page = 1;
         count = 24;
-        getJson(pageNum, count);
+        getTopArtistJson(pageNum, count);
         div.innerHTML = pageNum + "";
-        //if (pageNum != 1) {
-        //    div_1.innerHTML = pageNum - 1 + "";
-        //}
-        //div_2.innerHTML = pageNum + 1 + "";
+
     })
 
     $('.36').click(function () {
         isSimilar = false;
-        pageNum = 1;
+        page = 1;
         count = 36;
-        getJson(pageNum, count);
+        getTopArtistJson(pageNum, count);
         div.innerHTML = pageNum + "";
-        //if (pageNum != 1) {
-        //    div_1.innerHTML = pageNum - 1 + "";
-        //}
-        //div_2.innerHTML = pageNum + 1 + "";
+
     })
 
     $('.sim').click(function () {
@@ -160,4 +128,6 @@ $(document).ready(function () {
     $('.tr').click(function () {
         $('.nava').addClass('visible');
     })
+
+
 });
