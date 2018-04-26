@@ -9,3 +9,13 @@ D:\WEB_Onion\OAA.Tests\obj\Debug\netcoreapp2.0\OAA.Tests.csprojResolveAssemblyRe
 D:\WEB_Onion\OAA.Tests\obj\Debug\netcoreapp2.0\OAA.Tests.csproj.CoreCompileInputs.cache
 D:\WEB_Onion\OAA.Tests\obj\Debug\netcoreapp2.0\OAA.Tests.AssemblyInfoInputs.cache
 D:\WEB_Onion\OAA.Tests\obj\Debug\netcoreapp2.0\OAA.Tests.AssemblyInfo.cs
+D:\WEB_Onion\OAA.Tests\bin\Debug\netcoreapp2.0\OAA.Tests.pdb
+D:\WEB_Onion\OAA.Tests\bin\Debug\netcoreapp2.0\OAA.Data.dll
+D:\WEB_Onion\OAA.Tests\bin\Debug\netcoreapp2.0\OAA.Repo.dll
+D:\WEB_Onion\OAA.Tests\bin\Debug\netcoreapp2.0\OAA.Service.dll
+D:\WEB_Onion\OAA.Tests\bin\Debug\netcoreapp2.0\OAA.Service.pdb
+D:\WEB_Onion\OAA.Tests\bin\Debug\netcoreapp2.0\OAA.Data.pdb
+D:\WEB_Onion\OAA.Tests\bin\Debug\netcoreapp2.0\OAA.Repo.pdb
+D:\WEB_Onion\OAA.Tests\obj\Debug\netcoreapp2.0\OAA.Tests.csproj.CopyComplete
+D:\WEB_Onion\OAA.Tests\obj\Debug\netcoreapp2.0\OAA.Tests.dll
+D:\WEB_Onion\OAA.Tests\obj\Debug\netcoreapp2.0\OAA.Tests.pdb

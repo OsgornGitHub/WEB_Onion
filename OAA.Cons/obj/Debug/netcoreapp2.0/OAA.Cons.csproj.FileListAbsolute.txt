@@ -13,3 +13,7 @@ D:\WEB_Onion\OAA.Cons\bin\Debug\netcoreapp2.0\OAA.Data.pdb
 D:\WEB_Onion\OAA.Cons\bin\Debug\netcoreapp2.0\OAA.Repo.pdb
 D:\WEB_Onion\OAA.Cons\obj\Debug\netcoreapp2.0\OAA.Cons.csprojResolveAssemblyReference.cache
 D:\WEB_Onion\OAA.Cons\obj\Debug\netcoreapp2.0\OAA.Cons.csproj.CopyComplete
+D:\WEB_Onion\OAA.Cons\bin\Debug\netcoreapp2.0\OAA.Cons.dll.config
+D:\WEB_Onion\OAA.Cons\bin\Debug\netcoreapp2.0\OAA.Cons.pdb
+D:\WEB_Onion\OAA.Cons\obj\Debug\netcoreapp2.0\OAA.Cons.dll
+D:\WEB_Onion\OAA.Cons\obj\Debug\netcoreapp2.0\OAA.Cons.pdb

@@ -1,17 +1,17 @@
 ﻿using OAA.Data;
-using OAA.Service.Interfaces;
-using System.Collections.Generic;
+using OAA.Service.Service;
 using System.IO;
 using System.Linq;
+
 
 namespace OAA.Cons
 {
     public class SearchTrack
     {
-        private readonly ITrackService trackService;
-        private readonly IAlbumService albumService;
+        private readonly TrackService trackService;
+        private readonly AlbumService albumService;
 
-        public SearchTrack(IAlbumService albumService, ITrackService trackService)
+        public SearchTrack(AlbumService albumService, TrackService trackService)
         {
             this.trackService = trackService;
             this.albumService = albumService;
@@ -19,51 +19,30 @@ namespace OAA.Cons
 
         public void Search()
         {
-            string[] filenames = Directory.GetFiles("D:\\WEB_Onion\\Tracks", ".mp3", SearchOption.AllDirectories);
-            foreach(var track in filenames)
+            string[] filenames = Directory.GetFiles("D:\\WEB_Onion\\Tracks", "*.mp3", SearchOption.AllDirectories);
+            foreach(var link in filenames)
             {
                 // nameTrack_nameArtist.mp3
                 var nameTrack = "";
                 var nameArtist = "";
-                var splited = track.Split("_");
-                nameTrack = splited[0];
+                var splited = link.Split("+");
+                nameTrack = splited[0].Split("\\")[3];
                 nameArtist = splited[1].Replace(".mp3", "");
                 if (albumService.GetAll().FirstOrDefault(a => a.NameArtist == nameArtist).Tracks.FirstOrDefault(t => t.Name == nameTrack) != null)
                 {
-                    AddLinkToDb(nameTrack, nameArtist, track);
+                    AddLinkToDb(nameTrack, nameArtist, link);
                 }
-                else trackService.AddTrackFromLast(nameTrack, nameArtist, track);
+                else trackService.AddTrackFromLast(nameTrack, nameArtist, link);
             } 
         }
 
         public void AddLinkToDb(string nameTrack, string nameArtist, string link)
         {
+            string nameT = nameTrack;
+            string nameA = nameArtist;
             Track track = albumService.GetAll().FirstOrDefault(a => a.NameArtist == nameArtist).Tracks.FirstOrDefault(t => t.Name == nameTrack);
             track.Link = link;
             trackService.Update(track);
-        }
-
-        private string IsValidName(string name)
-        {
-            var validName = "";
-            if (name.IndexOf(" ") != -1)
-            {
-                var longName = name.Split(" ");
-                for (int i = 0; i < longName.Length; i++)
-                {
-                    if (i != longName.Length - 1)
-                    {
-                        validName += (longName[i] + "+");
-                    }
-                    else
-                    {
-                        validName += longName[i];
-                    }
-
-                }
-                return validName;
-            }
-            return name;
         }
     }
 }
