@@ -13,5 +13,11 @@ namespace OAA.Data
 
         public ICollection<Album> Albums { get; set; }
         public ICollection<Similar> Similars { get; set; }
+
+        public Artist()
+        {
+            Albums = new List<Album>();
+            Similars = new List<Similar>();
+        }
     }
 }

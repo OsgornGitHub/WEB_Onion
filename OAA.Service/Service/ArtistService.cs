@@ -44,8 +44,8 @@ namespace OAA.Service.Service
         public List<Artist> GetNextPage(int page, int count)
         {
             List<Artist> list = new List<Artist>();
-            dynamic ResultJson = GetResponse("http://ws.audioscrobbler.com/2.0/?method=chart.gettopartists&api_key=", page, count);
-            foreach (var person in ResultJson.artists.artist)
+            dynamic resultJson = GetResponse("http://ws.audioscrobbler.com/2.0/?method=chart.gettopartists&api_key=", page, count);
+            foreach (var person in resultJson.artists.artist)
             {
                 string name = person.name;
                 string photo = "";

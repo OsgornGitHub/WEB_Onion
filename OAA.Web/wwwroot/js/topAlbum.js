@@ -36,35 +36,9 @@ function loadAlbums(data) {
 $(document).ready(function () {
     name = document.getElementById('name').innerText;
     console.log(name);
-    var div = document.getElementById('page');
-    console.log(pageAlbum);
-    div.innerHTML = 1 + "";
-
-    $('.next_a').click(function () {
-        console.log(name);
-        pageAlbum++;
-        getAlbums(name, pageAlbum, countAlbum);
-        var div = document.getElementById('page');
-        div.innerHTML = pageAlbum + "";
-        console.log(pageAlbum);
-    })
-
-
-    $('.prev_a').click(function () {
-        if (pageAlbum !== 1) {
-            pageAlbum--;
-            getAlbums(name, pageAlbum, countAlbum);
-            var div = document.getElementById('page');
-            div.innerHTML = pageAlbum + "";
-            console.log(pageAlbum);
-        }
-    })
-
     $('.top_albums').click(function () {
-        var div = document.getElementById('page');
         pageAlbum = 1;
         countAlbum = 24;
-        div.innerHTML = pageAlbum + "";
         getAlbums(name, pageAlbum, countAlbum);
         console.log(name);
     })

@@ -9,15 +9,16 @@ namespace OAA.Tests
 {
     public class ArtistUnitTest
     {
+        private static string connectionString = @"Server=(localdb)\\mssqllocaldb;Database=oniondb;Trusted_Connection=True;MultipleActiveResultSets=true";
+        private static DbContextOptionsBuilder<ApplicationContext> optionsBuilder = new DbContextOptionsBuilder<ApplicationContext>();
+        private static DbContextOptions<OAA.Data.ApplicationContext> options = optionsBuilder.UseSqlServer(connectionString).Options;
+        private static ApplicationContext db = new ApplicationContext(options);
+        private UnitOfWork unitOfWork = new UnitOfWork(db);
+
         [Fact]
         public void GetNextPage()
         {
             // Arrange
-            string connectionString = @"Server=(localdb)\\mssqllocaldb;Database=oniondb;Trusted_Connection=True;MultipleActiveResultSets=true";
-            var optionsBuilder = new DbContextOptionsBuilder<ApplicationContext>();
-            var options = optionsBuilder.UseSqlServer(connectionString).Options;
-            ApplicationContext db = new ApplicationContext(options);
-            UnitOfWork unitOfWork = new UnitOfWork(db);
             ArtistService _artistService = new ArtistService(unitOfWork);
             // Act
             var listArtist = _artistService.GetNextPage(1, 24);
@@ -29,11 +30,6 @@ namespace OAA.Tests
         public void GetArtist()
         {
             // Arrange
-            string connectionString = @"Server=(localdb)\\mssqllocaldb;Database=oniondb;Trusted_Connection=True;MultipleActiveResultSets=true";
-            var optionsBuilder = new DbContextOptionsBuilder<ApplicationContext>();
-            var options = optionsBuilder.UseSqlServer(connectionString).Options;
-            ApplicationContext db = new ApplicationContext(options);
-            UnitOfWork unitOfWork = new UnitOfWork(db);
             ArtistService _artistService = new ArtistService(unitOfWork);
             // Act
             Artist artist = _artistService.GetArtist("Drake");
@@ -45,11 +41,6 @@ namespace OAA.Tests
         public void GetCountPageTopArtist()
         {
             // Arrange
-            string connectionString = @"Server=(localdb)\\mssqllocaldb;Database=oniondb;Trusted_Connection=True;MultipleActiveResultSets=true";
-            var optionsBuilder = new DbContextOptionsBuilder<ApplicationContext>();
-            var options = optionsBuilder.UseSqlServer(connectionString).Options;
-            ApplicationContext db = new ApplicationContext(options);
-            UnitOfWork unitOfWork = new UnitOfWork(db);
             ArtistService _artistService = new ArtistService(unitOfWork);
             // Act
             int count = _artistService.GetCountPageTopArtist(1, 24);

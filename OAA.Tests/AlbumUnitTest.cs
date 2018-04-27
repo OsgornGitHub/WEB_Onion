@@ -11,15 +11,16 @@ namespace OAA.Tests
 {
     public class AlbumUnitTest
     {
+        private static string connectionString = @"Server=(localdb)\\mssqllocaldb;Database=oniondb;Trusted_Connection=True;MultipleActiveResultSets=true";
+        private static DbContextOptionsBuilder<ApplicationContext> optionsBuilder = new DbContextOptionsBuilder<ApplicationContext>();
+        private static  DbContextOptions<OAA.Data.ApplicationContext> options = optionsBuilder.UseSqlServer(connectionString).Options;
+        private static ApplicationContext db = new ApplicationContext(options);
+        private UnitOfWork unitOfWork = new UnitOfWork(db);
+
         [Fact]
         public void GetTopAlbum()
         {
             // Arrange
-            string connectionString = @"Server=(localdb)\\mssqllocaldb;Database=oniondb;Trusted_Connection=True;MultipleActiveResultSets=true";
-            var optionsBuilder = new DbContextOptionsBuilder<ApplicationContext>();
-            var options = optionsBuilder.UseSqlServer(connectionString).Options;
-            ApplicationContext db = new ApplicationContext(options);
-            UnitOfWork unitOfWork = new UnitOfWork(db);
             AlbumService _albumService = new AlbumService(unitOfWork);
             // Act
             var listAlbum = _albumService.GetTopAlbum("Drake", 1, 24);
@@ -30,11 +31,6 @@ namespace OAA.Tests
         public void IsValidAlbumFalseEmtyString()
         {
             // Arrange
-            string connectionString = @"Server=(localdb)\\mssqllocaldb;Database=oniondb;Trusted_Connection=True;MultipleActiveResultSets=true";
-            var optionsBuilder = new DbContextOptionsBuilder<ApplicationContext>();
-            var options = optionsBuilder.UseSqlServer(connectionString).Options;
-            ApplicationContext db = new ApplicationContext(options);
-            UnitOfWork unitOfWork = new UnitOfWork(db);
             AlbumService _albumService = new AlbumService(unitOfWork);            
             // Act
             bool result = _albumService.IsValidAlbum("" , "test");
@@ -46,11 +42,6 @@ namespace OAA.Tests
         public void IsValidAlbumFalseNull()
         {
             // Arrange
-            string connectionString = @"Server=(localdb)\\mssqllocaldb;Database=oniondb;Trusted_Connection=True;MultipleActiveResultSets=true";
-            var optionsBuilder = new DbContextOptionsBuilder<ApplicationContext>();
-            var options = optionsBuilder.UseSqlServer(connectionString).Options;
-            ApplicationContext db = new ApplicationContext(options);
-            UnitOfWork unitOfWork = new UnitOfWork(db);
             AlbumService _albumService = new AlbumService(unitOfWork);
             // Act
             bool result = _albumService.IsValidAlbum("null", "test");
@@ -61,10 +52,6 @@ namespace OAA.Tests
         public void IsValidAlbumTrue()
         {
             // Arrange
-            string connectionString = @"Server=(localdb)\\mssqllocaldb;Database=oniondb;Trusted_Connection=True;MultipleActiveResultSets=true";
-            var optionsBuilder = new DbContextOptionsBuilder<ApplicationContext>();
-            var options = optionsBuilder.UseSqlServer(connectionString).Options;
-            ApplicationContext db = new ApplicationContext(options);
             UnitOfWork unitOfWork = new UnitOfWork(db);
             AlbumService _albumService = new AlbumService(unitOfWork);
             // Act
@@ -77,11 +64,6 @@ namespace OAA.Tests
         public void GetAlbum()
         {
             // Arrange
-            string connectionString = @"Server=(localdb)\\mssqllocaldb;Database=oniondb;Trusted_Connection=True;MultipleActiveResultSets=true";
-            var optionsBuilder = new DbContextOptionsBuilder<ApplicationContext>();
-            var options = optionsBuilder.UseSqlServer(connectionString).Options;
-            ApplicationContext db = new ApplicationContext(options);
-            UnitOfWork unitOfWork = new UnitOfWork(db);
             AlbumService _albumService = new AlbumService(unitOfWork);
             // Act
             Album album = _albumService.GetAlbum("Drake", "Take Care");

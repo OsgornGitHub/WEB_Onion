@@ -1,5 +1,6 @@
 ﻿using OAA.Data;
 using OAA.Service.Service;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 
@@ -28,6 +29,7 @@ namespace OAA.Cons
                 var splited = link.Split("+");
                 nameTrack = splited[0].Split("\\")[3];
                 nameArtist = splited[1].Replace(".mp3", "");
+                var ldsfo = albumService.GetAll();
                 if (albumService.GetAll().FirstOrDefault(a => a.NameArtist == nameArtist).Tracks.FirstOrDefault(t => t.Name == nameTrack) != null)
                 {
                     AddLinkToDb(nameTrack, nameArtist, link);

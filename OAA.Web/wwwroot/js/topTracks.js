@@ -43,32 +43,9 @@ $(document).ready(function () {
     pageTrack = 1;
 
 
-
-    $('.next_a').click(function () {
-        console.log(name);
-        pageTrack++;
-        getTracks(name, pageTrack, countTrack);
-        var div = document.getElementById('page');
-        div.innerHTML = pageTrack + "";
-        console.log(pageTrack);
-    })
-
-
-    $('.prev_a').click(function () {
-        if (pageTrack !== 1) {
-            pageTrack--;
-            getTracks(name, pageTrack, countTrack);
-            var div = document.getElementById('page');
-            div.innerHTML = pageTrack + "";
-            console.log(pageTrack);
-        }
-    })
-
     $('.top_tracks').click(function () {
         pageTrack = 1;
         countTrack = 24;
-        var div = document.getElementById('page');
-        div.innerHTML = pageTrack + "";
         getTracks(name, pageTrack, countTrack);
         console.log(name);
     })

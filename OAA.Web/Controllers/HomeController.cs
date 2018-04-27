@@ -42,8 +42,8 @@ namespace OAA.Web.Controllers
 
         [HttpGet]
         public IActionResult GetArtist(string name)
-        {    
-            if(artistService.GetAll().FirstOrDefault(a => a.Name == name) != null)
+        {
+            if (artistService.GetAll().FirstOrDefault(a => a.Name == name) != null)
             {
                 return View(artistService.GetAll().FirstOrDefault(a => a.Name == name));
             }
@@ -57,14 +57,23 @@ namespace OAA.Web.Controllers
         public IActionResult GetListSimilar(string name)
         {
             var nameForRequest = name.Replace(" ", "+");
-            if (artistService.GetAll().FirstOrDefault(a => a.Name == name).Similars != null)
-            {
-                return Ok(artistService.GetAll().FirstOrDefault(a => a.Name == name).Similars);
-            }
             List<Similar> listSimilar = new List<Similar>();
             List<SimilarViewModel> listModel = new List<SimilarViewModel>();
+            if (similarService.GetAll().Where(a => a.ArtistId == artistService.GetAll().FirstOrDefault(b => b.Name == name).ArtistId).Count() != 0)
+            {
+                foreach (Similar s in similarService.GetAll().Where(a => a.ArtistId == artistService.GetAll().FirstOrDefault(b => b.Name == name).ArtistId))
+                {
+                    var modelSim = new SimilarViewModel()
+                    {
+                        Name = s.Name,
+                        Photo = s.Photo
+                    };
+                    listModel.Add(modelSim);
+                }
+                return Ok(listModel);
+            }
             listSimilar = similarService.GetListSimilar(nameForRequest);
-            foreach(Similar sim in listSimilar)
+            foreach (Similar sim in listSimilar)
             {
                 sim.ArtistId = artistService.GetAll().FirstOrDefault(a => a.Name == name).ArtistId;
                 similarService.Create(sim);
@@ -83,9 +92,20 @@ namespace OAA.Web.Controllers
         {
             List<Album> topAlbums = new List<Album>();
             List<AlbumViewModel> listModel = new List<AlbumViewModel>();
-            if (artistService.GetAll().FirstOrDefault(a => a.Name == name).Albums != null)
+            var ga = albumService.GetAll().Where(a => a.ArtistId == artistService.GetAll().FirstOrDefault(b => b.Name == name).ArtistId).Count();
+            if (albumService.GetAll().Where(a => a.ArtistId == artistService.GetAll().FirstOrDefault(b => b.Name == name).ArtistId).Count() != 0)
             {
-                return Ok(artistService.GetAll().FirstOrDefault(a => a.Name == name).Albums);
+                foreach (Album a in albumService.GetAll().Where(a => a.ArtistId == artistService.GetAll().FirstOrDefault(b => b.Name == name).ArtistId))
+                {
+                    var modelAlb = new AlbumViewModel()
+                    {
+                        NameAlbum = a.NameAlbum,
+                        NameArtist = a.NameArtist,
+                        Cover = a.Cover
+                    };
+                    listModel.Add(modelAlb);
+                }
+                return Ok(listModel);
             }
             var nameForRequest = name.Replace(" ", "+");
             topAlbums = albumService.GetTopAlbum(nameForRequest, page, count);
@@ -113,25 +133,45 @@ namespace OAA.Web.Controllers
 
         public IActionResult GetAlbum(string nameArtist, string nameAlbum)
         {
-
-            //if (albumService.GetAll().FirstOrDefault(a => a.NameAlbum == nameAlbum).NameArtist == nameArtist)
-            //{
-            //    Album alb = albumService.GetAll().Where(a => a.NameAlbum == nameAlbum).FirstOrDefault(b => b.NameArtist == nameArtist);
-            //    return View(alb);
-            //}
-            var nameArtistForRequest = nameArtist.Replace(" ", "+");
-            var nameAlbumForRequest = nameAlbum.Replace(" ", "+");
-            Album album = albumService.GetAlbum(nameArtistForRequest, nameAlbumForRequest);
-            var artistId = artistService.GetAll().FirstOrDefault(a => a.Name == nameArtist).ArtistId;
-            foreach(Track track in album.Tracks)
+            if (albumService.GetAll().Where(a => a.ArtistId == artistService.GetAll().FirstOrDefault(b => b.Name == nameArtist).ArtistId).Count() != 0)
             {
-                track.AlbumId = albumService.GetAll().FirstOrDefault(a => a.NameAlbum == nameAlbum).AlbumId;
-                trackService.Create(track);
-            }
-            album.ArtistId = artistId;
-            albumService.Create(album);
 
-            return View(album);
+                if (albumService.GetAll().Where(a => a.NameAlbum == nameAlbum).FirstOrDefault(b => b.NameArtist == nameArtist).Tracks == null)
+                {
+                    Album alb = albumService.GetAll().Where(a => a.NameAlbum == nameAlbum).FirstOrDefault(b => b.NameArtist == nameArtist);
+                    var nameArtistForRequest = nameArtist.Replace(" ", "+");
+                    var nameAlbumForRequest = nameAlbum.Replace(" ", "+");
+                    Album album = albumService.GetAlbum(nameArtistForRequest, nameAlbumForRequest);
+                    var artistId = artistService.GetAll().FirstOrDefault(a => a.Name == nameArtist).ArtistId;
+                    foreach (Track track in album.Tracks)
+                    {
+                        track.AlbumId = alb.AlbumId;
+                        trackService.Create(track);
+                    }
+                    albumService.Update(alb);
+                    return View(album);
+                }
+                else
+                {
+                    return View(albumService.GetAll().Where(a => a.NameAlbum == nameAlbum).FirstOrDefault(b => b.NameArtist == nameArtist));
+                }
+
+            }
+            else
+            {
+                var nameArtistForRequest = nameArtist.Replace(" ", "+");
+                var nameAlbumForRequest = nameAlbum.Replace(" ", "+");
+                Album album = albumService.GetAlbum(nameArtistForRequest, nameAlbumForRequest);
+                var artistId = artistService.GetAll().FirstOrDefault(a => a.Name == nameArtist).ArtistId;
+                foreach (Track track in album.Tracks)
+                {
+                    track.AlbumId = album.AlbumId;
+                    trackService.Create(track);
+                }
+                albumService.Create(album);
+                return View(album);
+            }
+
         }
 
         public IActionResult GetCountPageTopArtist(int page, int count)
