@@ -10,7 +10,7 @@ $(function () {
         totalPages: totalPage,
         visiblePages: 10,
         onPageClick: function (event, page) {
-            console.info(page + ' (from options)');
+            console.info(page);
             window.history.pushState("", "Index", "?page=" + page);
         }
     }).on('page', function (event, page) {
@@ -79,6 +79,9 @@ function getSimilar(name) {
 }
 
 
+
+
+
 $(document).ready(function () {
     var div = document.getElementById('page');
 
@@ -94,8 +97,9 @@ $(document).ready(function () {
         isSimilar = false;
         page = 1;
         count = 12;
-        getTopArtistJson(pageNum, count);
-        div.innerHTML = pageNum + "";
+        var val = 'First';
+        $('a:contains("' + val + '")').get(0).click();
+        $('a:contains("' + val + '")').addClass('on');
 
     })
 
@@ -103,8 +107,10 @@ $(document).ready(function () {
         isSimilar = false;
         page = 1;
         count = 24;
-        getTopArtistJson(pageNum, count);
-        div.innerHTML = pageNum + "";
+        var val = 'First';
+        $('a:contains("' + val + '")').get(0).click();
+        $('a:contains("' + val + '")').addClass('on');
+ 
 
     })
 
@@ -112,8 +118,10 @@ $(document).ready(function () {
         isSimilar = false;
         page = 1;
         count = 36;
-        getTopArtistJson(pageNum, count);
-        div.innerHTML = pageNum + "";
+        var val = 'First';
+        $('a:contains("' + val + '")').get(0).click();
+        $('a:contains("' + val + '")').addClass('on');
+
 
     })
 

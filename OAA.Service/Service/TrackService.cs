@@ -46,52 +46,37 @@ namespace OAA.Service.Service
             List<Track> topTracks = new List<Track>();
             dynamic ResultJson = GetResponse("http://ws.audioscrobbler.com/2.0/?method=artist.gettoptracks&artist=", name, page, count);
             var nameTrack = "";
-            var cover = "";
             foreach (var music in ResultJson.toptracks.track)
             {
                 nameTrack = music.name;
-                foreach (dynamic dyn in music.image)
-                {
-                    if (dyn.size == "extralarge")
-                    {
-                        cover = dyn.text;
-                        break;
-                    }
-                }
                 Track track = new Track()
                 {
                     TrackId = Guid.NewGuid(),
                     Name = nameTrack,
-                    Cover = cover
                 };
                 topTracks.Add(track);
             }
             return topTracks;
         }
 
-        public void AddTrackFromLast(string nameTrack, string nameArtist, string link)
+        public Track AddTrackFromLast(string nameTrack, string nameArtist, string link)
         {
-            HttpWebRequest tokenRequest = (HttpWebRequest)WebRequest.Create("http://ws.audioscrobbler.com/2.0/?method=track.getInfo&artist=" + nameArtist + "&track=" + nameTrack + "&api_key=" + "1068375741deac644574d04838a37810" + "&format=json");
-            HttpWebResponse tokenResponse = (HttpWebResponse)tokenRequest.GetResponse();
-            string Result = new StreamReader(tokenResponse.GetResponseStream(), Encoding.UTF8).ReadToEnd();
-            dynamic ResultJson = JObject.Parse(Result);
-            var cover = "";
-            foreach (dynamic dyn in ResultJson.track.album.image)
-            {
-                if (dyn.size == "extralarge")
-                {
-                    cover = dyn.text;
-                    break;
-                }
-            }
+            dynamic resultJson = GetResponse("http://ws.audioscrobbler.com/2.0/?method=track.getInfo&artist=", nameTrack, nameArtist);
             Track track = new Track()
             {
                 TrackId = Guid.NewGuid(),
-                Name = ResultJson.track.name,
-                Cover = cover,
+                Name = resultJson.track.name,
+                NameAlbum = GetAlbumTrackName(nameArtist, nameTrack),
                 Link = link
             };
-            Create(track);
+            return track;
+        }
+
+        public string GetAlbumTrackName(string nameArtist, string nameTrack)
+        {
+            dynamic resultJson = GetResponse("http://ws.audioscrobbler.com/2.0/?method=track.getInfo", nameTrack, nameArtist);
+            string nameAlbum = resultJson.track.album.title;
+            return nameAlbum;
         }
 
         public JObject GetResponse(string url, string name, int page, int count)
@@ -103,5 +88,16 @@ namespace OAA.Service.Service
             JObject resultJson = JObject.Parse(result);
             return resultJson;
         }
+
+        public JObject GetResponse(string url, string nameTrack, string nameArtist)
+        {
+            HttpWebRequest tokenRequest = (HttpWebRequest)WebRequest.Create(url + "&artist=" + nameArtist + "&track=" + nameTrack + "&api_key=" + "1068375741deac644574d04838a37810" + "&format=json");
+            HttpWebResponse tokenResponse = (HttpWebResponse)tokenRequest.GetResponse();
+            string result = new StreamReader(tokenResponse.GetResponseStream(), Encoding.UTF8).ReadToEnd();
+            result = result.Replace("#", "");
+            JObject resultJson = JObject.Parse(result);
+            return resultJson;
+        }
+
     }
 }

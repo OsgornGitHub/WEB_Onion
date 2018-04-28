@@ -64,7 +64,7 @@ namespace OAA.Service.Service
                     {
                         AlbumId = Guid.NewGuid(),
                         NameAlbum = nameAlbum,
-                        NameArtist = name,
+                        NameArtist = name.Replace("+", " "),
                         Cover = cover
                     };
                     topAlbums.Add(album);
@@ -102,7 +102,6 @@ namespace OAA.Service.Service
             {
                 Track track = new Track()
                 {
-                    TrackId = Guid.NewGuid(),
                     Name = tr.name
                 };
                 tracks.Add(track);
@@ -120,7 +119,6 @@ namespace OAA.Service.Service
             }
             Album album = new Album()
             {
-                AlbumId = Guid.NewGuid(),
                 NameAlbum = albumName,
                 NameArtist = artistName,
                 Cover = image,

@@ -18,17 +18,21 @@
     <div class="col-md-8" style="padding: 0px; margin: 0px; ">
         @foreach (var track in Model.Tracks)
         {
+            <h4 class="text-right btn btn-default" style="display: block">
+                @track.Name
+                @if (track.Link != null)
+                {
+                    <a href="/Home/DownloadTrack?link=@track.Link">
+                        <h5 class="text-center" style="cursor: pointer">
+                            Download
+                            <span class="glyphicon glyphicon-floppy-disk"></span>
+                        </h5>
+                    </a>
+                }
 
-            <h4 class="text-right btn btn-default" style="display: block">@track.Name</h4>
-            @if (track.Link != null)
-            {
-                <a href=@track.Link>
-                    <h5 class="text-center" style="cursor: pointer">
-                        Download
-                        <span class="glyphicon glyphicon-floppy-disk"></span>
-                    </h5>
-                </a>
-            }
+
+            </h4>
+
 
         }
     </div>

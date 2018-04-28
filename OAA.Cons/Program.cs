@@ -17,7 +17,8 @@ namespace OAA.Cons
         {
             TrackService _trackService = new TrackService(unitOfWork);
             AlbumService _albumService = new AlbumService(unitOfWork);
-            SearchTrack search = new SearchTrack(_albumService, _trackService);
+            ArtistService _artistService = new ArtistService(unitOfWork);
+            SearchTrack search = new SearchTrack(_albumService, _trackService, _artistService);
             search.Search();
         }
     }

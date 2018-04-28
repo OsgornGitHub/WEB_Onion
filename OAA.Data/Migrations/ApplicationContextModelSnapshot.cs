@@ -87,6 +87,8 @@ namespace OAA.Data.Migrations
 
                     b.Property<string>("Name");
 
+                    b.Property<string>("NameAlbum");
+
                     b.HasKey("TrackId");
 
                     b.HasIndex("AlbumId");
