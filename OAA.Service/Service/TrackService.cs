@@ -61,7 +61,7 @@ namespace OAA.Service.Service
 
         public Track AddTrackFromLast(string nameTrack, string nameArtist, string link)
         {
-            dynamic resultJson = GetResponse("http://ws.audioscrobbler.com/2.0/?method=track.getInfo&artist=", nameTrack, nameArtist);
+            dynamic resultJson = GetResponse("http://ws.audioscrobbler.com/2.0/?method=track.getInfo", nameTrack, nameArtist.Replace(" ","+"));
             Track track = new Track()
             {
                 TrackId = Guid.NewGuid(),

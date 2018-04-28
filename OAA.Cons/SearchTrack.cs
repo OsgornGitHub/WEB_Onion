@@ -52,7 +52,7 @@ namespace OAA.Cons
                     albumService.Create(alb);
                 }
 
-                if (albumService.GetAll().FirstOrDefault(a => a.NameArtist == nameArtist).Tracks.Where(t => t.Name == nameTrack).Count() != 0)
+                if (trackService.GetAll().Where(a => a.Name == nameTrack).FirstOrDefault(b => b.NameAlbum == nameAlbum) != null)
                 {
                     AddLinkToDb(nameTrack, nameArtist, link.Replace(" ", "+"));
                 }
