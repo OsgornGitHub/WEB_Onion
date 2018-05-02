@@ -13,6 +13,7 @@ namespace OAA.Service.Interfaces
         void Update(Album album);
         void Delete(Album album);
         Album Get(string name);
+        Album GetById(Guid id);
         List<Album> GetTopAlbum(string name, int page, int count);
         bool IsValidAlbum(string cover, string name);
         JObject GetResponse(string url, string name, int page, int count);

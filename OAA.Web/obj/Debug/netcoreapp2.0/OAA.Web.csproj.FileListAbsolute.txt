@@ -68,3 +68,6 @@ D:\WEB_Onion\OAA.Web\obj\Debug\netcoreapp2.0\OAA.Web.AssemblyInfo.cs
 D:\WEB_Onion\OAA.Web\obj\Debug\netcoreapp2.0\OAA.Web.csproj.CopyComplete
 D:\WEB_Onion\OAA.Web\obj\Debug\netcoreapp2.0\OAA.Web.dll
 D:\WEB_Onion\OAA.Web\obj\Debug\netcoreapp2.0\OAA.Web.pdb
+D:\WEB_Onion\OAA.Web\bin\Debug\netcoreapp2.0\OAA.Cons.dll
+D:\WEB_Onion\OAA.Web\bin\Debug\netcoreapp2.0\OAA.Cons.pdb
+D:\WEB_Onion\OAA.Web\bin\Debug\netcoreapp2.0\OAA.Cons.dll.config

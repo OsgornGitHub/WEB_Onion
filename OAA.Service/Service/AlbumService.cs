@@ -29,6 +29,11 @@ namespace OAA.Service.Service
             return Database.Albums.GetAll().FirstOrDefault(a => a.Name == name);
         }
 
+        public Album GetById(Guid id)
+        {
+            return Database.Albums.GetAll().FirstOrDefault(a => a.Id == id);
+        }
+
         public void Create(Album album)
         {
             Database.Albums.Create(album);
@@ -107,12 +112,12 @@ namespace OAA.Service.Service
             {
                 Track track = new Track()
                 {
-                    Name = tr.name
+                    Name = tr.name,
+                    NameAlbum = nameAlbum
                 };
                 tracks.Add(track);
             }
-            var albumName = ResultJson.album.name;
-            var artistName = ResultJson.album.artist;
+            string artistName = ResultJson.album.artist;
             var image = "";
             foreach (dynamic dyn in ResultJson.album.image)
             {
@@ -124,7 +129,7 @@ namespace OAA.Service.Service
             }
             Album album = new Album()
             {
-                Name = albumName,
+                Name = nameAlbum,
                 NameArtist = artistName,
                 Cover = image,
                 Tracks = tracks

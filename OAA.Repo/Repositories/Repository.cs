@@ -40,6 +40,8 @@ namespace OAA.Repo.Repositories
             {
                 throw new ArgumentNullException("entity");
             }
+
+            entities.Update(item);
         }
 
         public void Delete(T item)

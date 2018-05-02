@@ -125,17 +125,10 @@ $(document).ready(function () {
 
     })
 
-    $('.sim').click(function () {
-        $('.nava').addClass('visible');
+    $('.add').click(function () {
+        var id = $(this).attr('id');
+        console.log(id);
+        $('.' + id).toggleClass('invis');
     })
-
-    $('.alb').click(function () {
-        $('.nava').addClass('visible');
-    })
-
-    $('.tr').click(function () {
-        $('.nava').addClass('visible');
-    })
-
 
 });

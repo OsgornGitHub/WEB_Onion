@@ -14,5 +14,6 @@ namespace OAA.Service.Interfaces
         Track Get(string name);
         Track AddTrackFromLast(string nameTrack, string nameArtist, string link);
         List<Track> GetTopTracks(string name, int count = 24, int page = 1);
+        string GetAlbumTrackName(string nameArtist, string nameTrack);
     }
 }

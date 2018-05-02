@@ -14,11 +14,10 @@
         <h3 class="text-center">@Model.NameArtist</h3>
     </div>
 
-
     <div class="col-md-8" style="padding: 0px; margin: 0px; ">
         @foreach (var track in Model.Tracks)
         {
-            <h4 class="text-right btn btn-default" style="display: block">
+            <div class="text-right btn btn-default" style="display: block">
                 @track.Name
                 @if (track.Link != null)
                 {
@@ -28,18 +27,41 @@
                             <span class="glyphicon glyphicon-floppy-disk"></span>
                         </h5>
                     </a>
+                    <audio controls>
+                        <source src="@track.Link" type="audio/mp3" />
+                        Ваш браузер не поддерживает теги HTML5 аудио.
+                    </audio>
+
+                
+
+                    @*<form id="form1">
+                            <object type="application/x-shockwave-flash" data="@track.Link"
+                                    width="240" height="20" id="dewplayer">
+                                <param name="wmode" value="transparent" />
+                                <param name="movie" value="@track.Link" />
+                            </object>
+                        </form>*@
                 }
+                else
+                {
+                    <button id="@track.Id" class="btn btn-default add">
+                        Add mp3 file
+                    </button>
+                }
+                <input type="hidden" value="@track.Id" />
+            </div>
+            @using (Html.BeginForm("AddFile", "Home", FormMethod.Post, new { enctype = "multipart/form-data" }))
+            {
+                <div class="@track.Id invis">
+                    <input type="hidden" value="@track.Id" name="Id" />
+                    <input type="hidden" value="@track.Name" name="Name" />
+                    <input type="hidden" value="@track.AlbumId" name="AlbumId" />
+                    <input type="file" name="File" /><br>
+                    <input type="submit" value="Загрузить" />
+                </div>
 
-
-            </h4>
-
-
+            }
         }
+
     </div>
 </div>
-
-
-
-
-
-

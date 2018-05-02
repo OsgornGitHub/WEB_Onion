@@ -14,6 +14,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\OAA.Cons\OAA.Cons.csproj" />
     <ProjectReference Include="..\OAA.Data\OAA.Data.csproj" />
     <ProjectReference Include="..\OAA.Repo\OAA.Repo.csproj" />
     <ProjectReference Include="..\OAA.Service\OAA.Service.csproj" />

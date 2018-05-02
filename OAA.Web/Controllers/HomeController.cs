@@ -1,8 +1,12 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using OAA.Cons;
 using OAA.Data;
 using OAA.Service.Interfaces;
 using OAA.Web.Models;
@@ -45,7 +49,7 @@ namespace OAA.Web.Controllers
             // Тип файла - content-type
             string file_type = "music/mp3";
             // Имя файла - необязательно
-            var file_name = good_link.Split("\\")[3];
+            var file_name = good_link.Split("/")[3];
             return PhysicalFile(file_path, file_type, file_name);
         }
 
@@ -121,6 +125,7 @@ namespace OAA.Web.Controllers
                         Cover = a.Cover
                     };
                     listModel.Add(modelAlb);
+
                 }
             }
 
@@ -128,7 +133,7 @@ namespace OAA.Web.Controllers
             topAlbums = albumService.GetTopAlbum(nameForRequest, page, count);
             foreach (var alb in topAlbums)
             {
-                var albumInDb = albumService.Get(name);
+                var albumInDb = albumService.Get(alb.Name);
                 if (albumInDb == null)
                 {
                     alb.ArtistId = artistService.Get(name).Id;
@@ -143,7 +148,7 @@ namespace OAA.Web.Controllers
                 }
 
             }
-            return Ok(listModel);           
+            return Ok(listModel);
         }
 
         public List<Track> GetTopTracks(string name, int count = 24, int page = 1)
@@ -185,6 +190,34 @@ namespace OAA.Web.Controllers
         {
             return Ok(artistService.GetCountPageTopArtist(page, count));
         }
+
+        [HttpPost]
+        public IActionResult AddFile(AddTrackViewModel model)
+        {
+            if (model.File != null)
+            {
+                string path = "/Tracks/" + model.File.FileName;
+                using (var fileStream = new FileStream(_appEnvironment.WebRootPath + path, FileMode.Create))
+                {
+                    model.File.CopyToAsync(fileStream);
+                }
+                Album album = albumService.GetById(model.AlbumId);
+                Track track = new Track()
+                {
+                    Id = model.Id,
+                    Name = model.Name,
+                    AlbumId = model.AlbumId,
+                    Link = "D:/WEB_Onion" + path,
+                    NameAlbum = album.Name
+                };
+                trackService.Delete(track);
+                trackService.Create(track);
+                return RedirectToAction("GetAlbum", "Home", new { nameArtist = album.NameArtist, nameAlbum = album.Name });
+            }
+            return StatusCode(400);
+
+        }
+
         //public IActionResult Error()
         //{
         //    return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
