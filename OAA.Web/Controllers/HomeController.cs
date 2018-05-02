@@ -41,19 +41,6 @@ namespace OAA.Web.Controllers
             return View(list);
         }
 
-        public IActionResult DownloadTrack(string link)
-        {
-            string good_link = link.Replace("+", " ");
-            // Путь к файлу
-            string file_path = Path.Combine(_appEnvironment.ContentRootPath, good_link);
-            // Тип файла - content-type
-            string file_type = "music/mp3";
-            // Имя файла - необязательно
-            var file_name = good_link.Split("/")[3];
-            return PhysicalFile(file_path, file_type, file_name);
-        }
-
-
         public JsonResult GetTopArtistJson(int page, int count)
         {
             var list = artistService.GetNextPage(page, count);
@@ -196,7 +183,7 @@ namespace OAA.Web.Controllers
         {
             if (model.File != null)
             {
-                string path = "/Tracks/" + model.File.FileName;
+                string path = model.File.FileName;
                 using (var fileStream = new FileStream(_appEnvironment.WebRootPath + path, FileMode.Create))
                 {
                     model.File.CopyToAsync(fileStream);
@@ -207,7 +194,7 @@ namespace OAA.Web.Controllers
                     Id = model.Id,
                     Name = model.Name,
                     AlbumId = model.AlbumId,
-                    Link = "D:/WEB_Onion" + path,
+                    Link = "http://localhost:52527/tracks/" + path,
                     NameAlbum = album.Name
                 };
                 trackService.Delete(track);

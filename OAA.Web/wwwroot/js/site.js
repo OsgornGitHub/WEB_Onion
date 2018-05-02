@@ -85,6 +85,27 @@ function getSimilar(name) {
 $(document).ready(function () {
     var div = document.getElementById('page');
 
+    var audio = document.getElementById("audio");
+    function control() {
+        document.addEventListener('keydown', function (e) {
+            if (!audio.paused) audio.pause();
+            if (e.which == 39) {
+                audio.currentTime += 10;
+            }
+            if (e.which == 37) {
+                audio.currentTime -= 10;
+            }
+        }, false);
+        document.addEventListener('keyup', function (e) {
+            if ((e.which == 39 || e.which == 37) && audio.paused) {
+                audio.play();
+            }
+        }, false);
+    }
+    audio.addEventListener("loadedmetadata", control, false);
+
+    
+
     $('.similar').click(function () {
         var name = document.getElementById('name').innerText;
         isSimilar = true;
@@ -130,5 +151,7 @@ $(document).ready(function () {
         console.log(id);
         $('.' + id).toggleClass('invis');
     })
+
+
 
 });

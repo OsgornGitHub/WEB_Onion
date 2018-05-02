@@ -21,26 +21,11 @@
                 @track.Name
                 @if (track.Link != null)
                 {
-                    <a href="/Home/DownloadTrack?link=@track.Link">
-                        <h5 class="text-center" style="cursor: pointer">
-                            Download
-                            <span class="glyphicon glyphicon-floppy-disk"></span>
-                        </h5>
-                    </a>
-                    <audio controls>
-                        <source src="@track.Link" type="audio/mp3" />
-                        Ваш браузер не поддерживает теги HTML5 аудио.
-                    </audio>
-
-                
-
-                    @*<form id="form1">
-                            <object type="application/x-shockwave-flash" data="@track.Link"
-                                    width="240" height="20" id="dewplayer">
-                                <param name="wmode" value="transparent" />
-                                <param name="movie" value="@track.Link" />
-                            </object>
-                        </form>*@
+                    <div>
+                        <audio controls id="audio">
+                            <source src="@track.Link" type="audio/mp3" />                            
+                        </audio>
+                    </div>
                 }
                 else
                 {

@@ -33,7 +33,7 @@ namespace OAA.Cons
                 nameTrack = splited[0].Split("/")[5];
                 nameArtist = splited[1].Replace(".mp3", "");
 
-
+                var linkT = "http://localhost:52527/tracks/" + nameTrack + "-" + nameArtist + ".mp3";
 
                 var nameT = nameTrack.Replace(" ", "+");
                 var nameA = nameArtist.Replace(" ", "+");
@@ -55,11 +55,11 @@ namespace OAA.Cons
 
                 if (trackService.GetAll().Where(a => a.Name == nameTrack).FirstOrDefault(b => b.NameAlbum == nameAlbum) != null)
                 {
-                    AddLinkToDb(nameTrack, nameArtist, link);
+                    AddLinkToDb(nameTrack, nameArtist, linkT);
                 }
                 else
                 {
-                    Track track = trackService.AddTrackFromLast(nameTrack, nameArtist, link.Replace(" ", "+"));
+                    Track track = trackService.AddTrackFromLast(nameTrack, nameArtist, linkT);
                     track.AlbumId = albumService.GetAll().Where(a => a.Name == nameAlbum).FirstOrDefault(b => b.NameArtist == nameArtist).Id;
                     track.NameAlbum = nameAlbum;
                     trackService.Create(track);
