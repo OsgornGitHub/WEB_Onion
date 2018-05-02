@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Net;
 using System.Text;
 using Newtonsoft.Json.Linq;
 using OAA.Data;
-using OAA.Repo.Intarfaces;
 using OAA.Service.Interfaces;
 
 namespace OAA.Service.Service
@@ -22,6 +22,11 @@ namespace OAA.Service.Service
         public IEnumerable<Track> GetAll()
         {
             return Database.Tracks.GetAll();
+        }
+
+        public Track Get(string name)
+        {
+            return Database.Tracks.GetAll().FirstOrDefault(a => a.Name == name);
         }
 
         public void Create(Track track)
@@ -51,7 +56,7 @@ namespace OAA.Service.Service
                 nameTrack = music.name;
                 Track track = new Track()
                 {
-                    TrackId = Guid.NewGuid(),
+                    Id = Guid.NewGuid(),
                     Name = nameTrack,
                 };
                 topTracks.Add(track);
@@ -64,7 +69,7 @@ namespace OAA.Service.Service
             dynamic resultJson = GetResponse("http://ws.audioscrobbler.com/2.0/?method=track.getInfo", nameTrack, nameArtist.Replace(" ","+"));
             Track track = new Track()
             {
-                TrackId = Guid.NewGuid(),
+                Id = Guid.NewGuid(),
                 Name = resultJson.track.name,
                 NameAlbum = GetAlbumTrackName(nameArtist, nameTrack),
                 Link = link

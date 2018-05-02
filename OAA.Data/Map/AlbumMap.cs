@@ -9,8 +9,8 @@ namespace OAA.Data
     {
         public AlbumMap(EntityTypeBuilder<Album> entityBuilder)
         {
-            entityBuilder.HasKey(t => t.AlbumId);
-            entityBuilder.Property(t => t.NameAlbum);
+            entityBuilder.HasKey(t => t.Id);
+            entityBuilder.Property(t => t.Name);
             entityBuilder.Property(t => t.NameArtist);
             entityBuilder.Property(t => t.Cover);
             entityBuilder.HasOne(i => i.Artist).WithMany(i => i.Albums).HasForeignKey(i => i.ArtistId);

@@ -9,7 +9,7 @@ namespace OAA.Data
     {
         public TrackMap(EntityTypeBuilder<Track> entityBuilder)
         {
-            entityBuilder.HasKey(t => t.TrackId);
+            entityBuilder.HasKey(t => t.Id);
             entityBuilder.Property(t => t.Name);
             entityBuilder.Property(t => t.NameAlbum);
             entityBuilder.Property(t => t.Link);

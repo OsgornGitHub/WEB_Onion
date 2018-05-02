@@ -27,14 +27,12 @@ namespace OAA.Web
 
             services.AddMvc();
             services.AddTransient<IUnitOfWork, UnitOfWork>();
-
             services.AddDbContext<ApplicationContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"), b => b.MigrationsAssembly("OAA.Data")));
-
+            services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
             services.AddTransient<IArtistService, ArtistService>();
             services.AddTransient<IAlbumService, AlbumService>();
             services.AddTransient<ITrackService, TrackService>();
             services.AddTransient<ISimilarService, SimilarService>();
-
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

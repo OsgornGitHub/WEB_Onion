@@ -1,13 +1,12 @@
-﻿using System;
+﻿using OAA.Data.Models;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
 namespace OAA.Data
 {
-    public class Track
+    public class Track : BaseEntity
     {
-        public Guid TrackId { get; set; }
-        public string Name { get; set; }
         public string NameAlbum { get; set; }
         public string Link { get; set; }
         public string Cover { get; set; }

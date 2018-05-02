@@ -11,10 +11,10 @@ namespace OAA.Repo
     public class UnitOfWork : IUnitOfWork
     {
         private ApplicationContext db;
-        private ArtistRepository artistRepository;
-        private AlbumRepository albumRepository;
-        private SimilarRepository similarRepository;
-        private TrackRepository trackRepository;
+        private Repository<Artist> artistRepository;
+        private Repository<Album> albumRepository;
+        private Repository<Similar> similarRepository;
+        private Repository<Track> trackRepository;
 
         public UnitOfWork(ApplicationContext context)
         {
@@ -25,7 +25,7 @@ namespace OAA.Repo
             get
             {
                 if (artistRepository == null)
-                    artistRepository = new ArtistRepository(db);
+                    artistRepository = new Repository<Artist>(db);
                 return artistRepository;
             }
         }
@@ -35,7 +35,7 @@ namespace OAA.Repo
             get
             {
                 if (albumRepository == null)
-                    albumRepository = new AlbumRepository(db);
+                    albumRepository = new Repository<Album>(db);
                 return albumRepository;
             }
         }
@@ -45,7 +45,7 @@ namespace OAA.Repo
             get
             {
                 if (trackRepository == null)
-                    trackRepository = new TrackRepository(db);
+                    trackRepository = new Repository<Track>(db);
                 return trackRepository;
             }
         }
@@ -55,7 +55,7 @@ namespace OAA.Repo
             get
             {
                 if (similarRepository == null)
-                    similarRepository = new SimilarRepository(db);
+                    similarRepository = new Repository<Similar>(db);
                 return similarRepository;
             }
         }

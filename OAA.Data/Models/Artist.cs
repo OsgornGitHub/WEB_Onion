@@ -1,13 +1,12 @@
-﻿using System;
+﻿using OAA.Data.Models;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
 namespace OAA.Data
 {
-    public class Artist
+    public class Artist : BaseEntity
     {
-        public Guid ArtistId { get; set; }
-        public string Name { get; set; }
         public string Photo { get; set; }
         public string Biography { get; set; }
 

@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Net;
 using System.Text;
 using Newtonsoft.Json.Linq;
@@ -22,6 +23,11 @@ namespace OAA.Service.Service
         public IEnumerable<Artist> GetAll()
         {
             return Database.Artists.GetAll();
+        }
+
+        public Artist Get(string name)
+        {
+            return Database.Artists.GetAll().FirstOrDefault(a => a.Name == name);
         }
 
         public void Create(Artist artist)
@@ -96,7 +102,7 @@ namespace OAA.Service.Service
             }
             Artist artist = new Artist()
             {
-                ArtistId = Guid.NewGuid(),
+                Id = Guid.NewGuid(),
                 Name = name,
                 Photo = photo,
                 Biography = bio

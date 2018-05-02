@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Net;
 using System.Text;
 using Newtonsoft.Json.Linq;
 using OAA.Data;
-using OAA.Repo.Intarfaces;
 using OAA.Service.Interfaces;
 
 namespace OAA.Service.Service
@@ -22,6 +22,11 @@ namespace OAA.Service.Service
         public IEnumerable<Album> GetAll()
         {
             return Database.Albums.GetAll();
+        }
+
+        public Album Get(string name)
+        {
+            return Database.Albums.GetAll().FirstOrDefault(a => a.Name == name);
         }
 
         public void Create(Album album)
@@ -62,8 +67,8 @@ namespace OAA.Service.Service
                 {
                     Album album = new Album()
                     {
-                        AlbumId = Guid.NewGuid(),
-                        NameAlbum = nameAlbum,
+                        Id = Guid.NewGuid(),
+                        Name = nameAlbum,
                         NameArtist = name.Replace("+", " "),
                         Cover = cover
                     };
@@ -119,7 +124,7 @@ namespace OAA.Service.Service
             }
             Album album = new Album()
             {
-                NameAlbum = albumName,
+                Name = albumName,
                 NameArtist = artistName,
                 Cover = image,
                 Tracks = tracks

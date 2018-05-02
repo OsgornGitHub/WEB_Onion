@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Net;
 using System.Text;
 using Newtonsoft.Json.Linq;
@@ -22,6 +23,11 @@ namespace OAA.Service.Service
         public IEnumerable<Similar> GetAll()
         {
             return Database.Similars.GetAll();
+        }
+
+        public Similar Get(string name)
+        {
+            return Database.Similars.GetAll().FirstOrDefault(a => a.Name == name);
         }
 
         public void Create(Similar similars)
@@ -60,7 +66,7 @@ namespace OAA.Service.Service
                 }
                 Similar similar = new Similar
                 {
-                    SimilarId = Guid.NewGuid(),
+                    Id = Guid.NewGuid(),
                     Name = nameSimilar,
                     Photo = photoSimilar
                 };

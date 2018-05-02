@@ -12,6 +12,7 @@ namespace OAA.Service.Interfaces
         void Create(Artist artist);
         void Update(Artist artist);
         void Delete(Artist artist);
+        Artist Get(string name);
         List<Artist> GetNextPage(int page, int count);
         JObject GetResponse(string url, int page, int count);
         Artist GetArtist(string name);

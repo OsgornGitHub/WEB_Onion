@@ -1,13 +1,12 @@
-﻿using System;
+﻿using OAA.Data.Models;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
 namespace OAA.Data
 {
-    public class Similar
+    public class Similar : BaseEntity
     {
-        public Guid SimilarId { get; set; }
-        public string Name { get; set; }
         public string Photo { get; set; }
 
         public Guid ArtistId { get; set; }

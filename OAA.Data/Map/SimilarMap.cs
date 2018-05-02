@@ -11,7 +11,7 @@ namespace OAA.Data
         {
             entityBuilder.Property(t => t.Name);
             entityBuilder.Property(t => t.Photo);
-            entityBuilder.Property(t => t.SimilarId);
+            entityBuilder.Property(t => t.Id);
             entityBuilder.HasOne(i => i.Artist).WithMany(i => i.Similars).HasForeignKey(i => i.ArtistId);
         }
     }

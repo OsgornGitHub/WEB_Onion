@@ -75,9 +75,10 @@ namespace OAA.Web.Controllers
             var nameForRequest = name.Replace(" ", "+");
             List<Similar> listSimilar = new List<Similar>();
             List<SimilarViewModel> listModel = new List<SimilarViewModel>();
-            if (similarService.GetAll().Where(a => a.ArtistId == artistService.GetAll().FirstOrDefault(b => b.Name == name).ArtistId).Count() != 0)
+            var listSimInDb = similarService.GetAll().Where(a => a.ArtistId == artistService.GetAll().FirstOrDefault(b => b.Name == name).Id);
+            if (listSimInDb.Count() != 0)
             {
-                foreach (Similar s in similarService.GetAll().Where(a => a.ArtistId == artistService.GetAll().FirstOrDefault(b => b.Name == name).ArtistId))
+                foreach (Similar s in listSimInDb)
                 {
                     var modelSim = new SimilarViewModel()
                     {
@@ -91,7 +92,7 @@ namespace OAA.Web.Controllers
             listSimilar = similarService.GetListSimilar(nameForRequest);
             foreach (Similar sim in listSimilar)
             {
-                sim.ArtistId = artistService.GetAll().FirstOrDefault(a => a.Name == name).ArtistId;
+                sim.ArtistId = artistService.Get(name).Id;
                 similarService.Create(sim);
                 var model = new SimilarViewModel()
                 {
@@ -108,14 +109,14 @@ namespace OAA.Web.Controllers
         {
             List<Album> topAlbums = new List<Album>();
             List<AlbumViewModel> listModel = new List<AlbumViewModel>();
-
-            if (albumService.GetAll().Where(a => a.ArtistId == artistService.GetAll().FirstOrDefault(b => b.Name == name).ArtistId).Count() != 0)
+            var listAlbInDb = albumService.GetAll().Where(a => a.ArtistId == artistService.Get(name).Id);
+            if (listAlbInDb.Count() != 0)
             {
-                foreach (Album a in albumService.GetAll().Where(a => a.ArtistId == artistService.GetAll().FirstOrDefault(b => b.Name == name).ArtistId))
+                foreach (Album a in listAlbInDb)
                 {
                     var modelAlb = new AlbumViewModel()
                     {
-                        NameAlbum = a.NameAlbum,
+                        NameAlbum = a.Name,
                         NameArtist = a.NameArtist,
                         Cover = a.Cover
                     };
@@ -127,14 +128,14 @@ namespace OAA.Web.Controllers
             topAlbums = albumService.GetTopAlbum(nameForRequest, page, count);
             foreach (var alb in topAlbums)
             {
-
-                if (albumService.GetAll().FirstOrDefault(b => b.NameAlbum == alb.NameAlbum) == null)
+                var albumInDb = albumService.Get(name);
+                if (albumInDb == null)
                 {
-                    alb.ArtistId = artistService.GetAll().FirstOrDefault(a => a.Name == name).ArtistId;
+                    alb.ArtistId = artistService.Get(name).Id;
                     albumService.Create(alb);
                     var model = new AlbumViewModel()
                     {
-                        NameAlbum = alb.NameAlbum,
+                        NameAlbum = alb.Name,
                         Cover = alb.Cover,
                         NameArtist = alb.NameArtist
                     };
@@ -142,41 +143,7 @@ namespace OAA.Web.Controllers
                 }
 
             }
-            return Ok(listModel);
-
-
-
-
-
-            //if (albumService.GetAll().Where(a => a.ArtistId == artistService.GetAll().FirstOrDefault(b => b.Name == name).ArtistId).Count() != 0)
-            //{
-            //    foreach (Album a in albumService.GetAll().Where(a => a.ArtistId == artistService.GetAll().FirstOrDefault(b => b.Name == name).ArtistId))
-            //    {
-            //        var modelAlb = new AlbumViewModel()
-            //        {
-            //            NameAlbum = a.NameAlbum,
-            //            NameArtist = a.NameArtist,
-            //            Cover = a.Cover
-            //        };
-            //        listModel.Add(modelAlb);
-            //    }
-            //    return Ok(listModel);
-            //}
-            //var nameForRequest = name.Replace(" ", "+");
-            //topAlbums = albumService.GetTopAlbum(nameForRequest, page, count);
-            //foreach (var alb in topAlbums)
-            //{
-            //    alb.ArtistId = artistService.GetAll().FirstOrDefault(a => a.Name == name).ArtistId;
-            //    albumService.Create(alb);
-            //    var model = new AlbumViewModel()
-            //    {
-            //        NameAlbum = alb.NameAlbum,
-            //        Cover = alb.Cover,
-            //        NameArtist = alb.NameArtist
-            //    };
-            //    listModel.Add(model);
-            //}
-            //return Ok(listModel);
+            return Ok(listModel);           
         }
 
         public List<Track> GetTopTracks(string name, int count = 24, int page = 1)
@@ -191,16 +158,16 @@ namespace OAA.Web.Controllers
             var nameArtistForRequest = nameArtist.Replace(" ", "+");
             var nameAlbumForRequest = nameAlbum.Replace(" ", "+");
 
-            var d = trackService.GetAll().Where(a => a.AlbumId == albumService.GetAll().FirstOrDefault(b => b.NameAlbum == nameAlbum).AlbumId);
-            if (trackService.GetAll().Where(a => a.AlbumId == albumService.GetAll().FirstOrDefault(b => b.NameAlbum == nameAlbum).AlbumId).Count() == 0)
+            var listTrackInDb = trackService.GetAll().Where(a => a.AlbumId == albumService.Get(nameAlbum).Id);
+            if (listTrackInDb.Count() == 0)
             {
-                Album alb = albumService.GetAll().Where(a => a.NameAlbum == nameAlbum).FirstOrDefault(b => b.NameArtist == nameArtist);
+                Album alb = albumService.GetAll().Where(a => a.Name == nameAlbum).FirstOrDefault(b => b.NameArtist == nameArtist);
 
                 Album album = albumService.GetAlbum(nameArtistForRequest, nameAlbumForRequest);
-                var artistId = artistService.GetAll().FirstOrDefault(a => a.Name == nameArtist).ArtistId;
+                var artistId = artistService.Get(nameArtist).Id;
                 foreach (Track track in album.Tracks)
                 {
-                    track.AlbumId = alb.AlbumId;
+                    track.AlbumId = alb.Id;
                     track.NameAlbum = nameAlbum;
                     trackService.Create(track);
                 }
@@ -209,7 +176,7 @@ namespace OAA.Web.Controllers
             }
             else
             {
-                return View(albumService.GetAll().Where(a => a.NameAlbum == nameAlbum).FirstOrDefault(b => b.NameArtist == nameArtist));
+                return View(albumService.GetAll().Where(a => a.Name == nameAlbum).FirstOrDefault(b => b.NameArtist == nameArtist));
             }
 
         }

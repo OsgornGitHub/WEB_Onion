@@ -43,12 +43,12 @@ namespace OAA.Cons
                 }
 
                 var nameAlbum = trackService.GetAlbumTrackName(nameA, nameT);
-                Album album = albumService.GetAll().Where(a => a.NameArtist == nameArtist).FirstOrDefault(b => b.NameAlbum == nameAlbum);
+                Album album = albumService.GetAll().Where(a => a.NameArtist == nameArtist).FirstOrDefault(b => b.Name == nameAlbum);
 
                 if (album == null)
                 {
                     Album alb = albumService.GetAlbum(nameArtist, nameAlbum);
-                    alb.ArtistId = artistService.GetAll().FirstOrDefault(a => a.Name == nameArtist).ArtistId;
+                    alb.ArtistId = artistService.Get(nameArtist).Id;
                     albumService.Create(alb);
                 }
 
@@ -59,7 +59,7 @@ namespace OAA.Cons
                 else
                 {
                     Track track = trackService.AddTrackFromLast(nameTrack, nameArtist, link.Replace(" ", "+"));
-                    track.AlbumId = albumService.GetAll().Where(a => a.NameAlbum == nameAlbum).FirstOrDefault(b => b.NameArtist == nameArtist).AlbumId;
+                    track.AlbumId = albumService.GetAll().Where(a => a.Name == nameAlbum).FirstOrDefault(b => b.NameArtist == nameArtist).Id;
                     track.NameAlbum = nameAlbum;
                     trackService.Create(track);
                 }

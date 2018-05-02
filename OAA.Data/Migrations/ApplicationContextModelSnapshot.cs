@@ -22,18 +22,18 @@ namespace OAA.Data.Migrations
 
             modelBuilder.Entity("OAA.Data.Album", b =>
                 {
-                    b.Property<Guid>("AlbumId")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd();
 
                     b.Property<Guid>("ArtistId");
 
                     b.Property<string>("Cover");
 
-                    b.Property<string>("NameAlbum");
+                    b.Property<string>("Name");
 
                     b.Property<string>("NameArtist");
 
-                    b.HasKey("AlbumId");
+                    b.HasKey("Id");
 
                     b.HasIndex("ArtistId");
 
@@ -42,7 +42,7 @@ namespace OAA.Data.Migrations
 
             modelBuilder.Entity("OAA.Data.Artist", b =>
                 {
-                    b.Property<Guid>("ArtistId")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd();
 
                     b.Property<string>("Biography");
@@ -51,14 +51,14 @@ namespace OAA.Data.Migrations
 
                     b.Property<string>("Photo");
 
-                    b.HasKey("ArtistId");
+                    b.HasKey("Id");
 
                     b.ToTable("Artist");
                 });
 
             modelBuilder.Entity("OAA.Data.Similar", b =>
                 {
-                    b.Property<Guid>("SimilarId")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd();
 
                     b.Property<Guid>("ArtistId");
@@ -67,7 +67,7 @@ namespace OAA.Data.Migrations
 
                     b.Property<string>("Photo");
 
-                    b.HasKey("SimilarId");
+                    b.HasKey("Id");
 
                     b.HasIndex("ArtistId");
 
@@ -76,7 +76,7 @@ namespace OAA.Data.Migrations
 
             modelBuilder.Entity("OAA.Data.Track", b =>
                 {
-                    b.Property<Guid>("TrackId")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd();
 
                     b.Property<Guid>("AlbumId");
@@ -89,7 +89,7 @@ namespace OAA.Data.Migrations
 
                     b.Property<string>("NameAlbum");
 
-                    b.HasKey("TrackId");
+                    b.HasKey("Id");
 
                     b.HasIndex("AlbumId");
 
