@@ -19,5 +19,6 @@ namespace OAA.Service.Interfaces
         JObject GetResponse(string url, string name, int page, int count);
         Album GetAlbum(string nameArtist, string nameAlbum);
         JObject GetResponse(string url, string nameArtist, string nameAlbum);
+        List<Album> GetAlbumsByNameArtist(string nameArtist);
     }
 }

@@ -34,6 +34,11 @@ namespace OAA.Service.Service
             return Database.Albums.GetAll().FirstOrDefault(a => a.Id == id);
         }
 
+        public List<Album> GetAlbumsByNameArtist(string nameArtist)
+        {
+            return Database.Albums.GetAlbumByName(nameArtist).ToList();
+        }
+
         public void Create(Album album)
         {
             Database.Albums.Create(album);

@@ -11,5 +11,6 @@ namespace OAA.Repo.Intarfaces
         void Create(T item);
         void Update(T item);
         void Delete(T item);
+        IEnumerable<T> GetAlbumByName(string nameArtist);
     }
 }

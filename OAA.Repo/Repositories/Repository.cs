@@ -25,6 +25,12 @@ namespace OAA.Repo.Repositories
             return entities.AsEnumerable();
         }
 
+        public IEnumerable<T> GetAlbumByName(string nameArtist)
+        {
+            var albums = entities.FromSql("EXECUTE dbo.GetAlbumByName {0}", nameArtist);
+            return albums;
+        }
+
         public void Create(T item)
         {
             if (item == null)

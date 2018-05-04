@@ -100,7 +100,7 @@ namespace OAA.Web.Controllers
         {
             List<Album> topAlbums = new List<Album>();
             List<AlbumViewModel> listModel = new List<AlbumViewModel>();
-            var listAlbInDb = albumService.GetAll().Where(a => a.ArtistId == artistService.Get(name).Id);
+            var listAlbInDb = albumService.GetAlbumsByNameArtist(name);
             if (listAlbInDb.Count() != 0)
             {
                 foreach (Album a in listAlbInDb)
