@@ -80,8 +80,6 @@ function getSimilar(name) {
 
 
 
-
-
 $(document).ready(function () {
     var div = document.getElementById('page');
 
@@ -102,26 +100,31 @@ $(document).ready(function () {
     //        }
     //    }, false);
     //}
-    //audio.addEventListener("loadedmetadata", control, false);
 
-
-
-
-
-    $(window).blur(function () {
-
-    var audios = document.getElementsByTagName("audio");
+    document.addEventListener('play', function (e) {
+        var audios = document.getElementsByTagName('audio');
+        localStorage['audio'] += audios;
         for (var i = 0; i < audios.length; i++) {
-            audios[i].pause();
+            if (audios[i] != e.target) {
+                audios[i].pause();
+            }
         }
-    });
 
-    //$(window).focus(function () {
-    //    au.play();
-    //});
+    }, true);
 
 
 
+    window.addEventListener('storage', storageEventHandler, false);
+
+    function storageEventHandler(e) {
+        console.log(e.key); //имя
+        var audios = document.getElementsByTagName('audio');
+        for (var i = 0; i < audios.length; i++) {
+            if (audios[i] != e.target) {
+                audios[i].pause();
+            }
+        }
+    }
 
     $('.similar').click(function () {
         var name = document.getElementById('name').innerText;
