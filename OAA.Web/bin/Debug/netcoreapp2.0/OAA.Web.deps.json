@@ -23,6 +23,7 @@
     ".NETCoreApp,Version=v2.0": {
       "OAA.Web/1.0.0": {
         "dependencies": {
+          "EntityFramework": "6.2.0",
           "Microsoft.AspNetCore.All": "2.0.0",
           "Microsoft.NETCore.App": "2.0.0",
           "OAA.Cons": "1.0.0",
@@ -3792,6 +3793,7 @@
       },
       "OAA.Data/1.0.0": {
         "dependencies": {
+          "EntityFramework": "6.2.0",
           "Microsoft.EntityFrameworkCore": "2.0.2",
           "Microsoft.EntityFrameworkCore.Design": "2.0.2",
           "Microsoft.EntityFrameworkCore.SqlServer": "2.0.2"
