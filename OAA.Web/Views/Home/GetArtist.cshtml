@@ -3,30 +3,56 @@
     ViewData["Title"] = "Artist";
 }
 
-
-<head>
-    <meta charset="UTF-8">
+<environment include="Development">
     <link rel="stylesheet" href="~/css/style.css">
-</head>
+</environment>
+
+
 
 <body>
     <main>
-        <input id="tab1" type="radio" name="tabs" checked>
-        <label for="tab1">Artist</label>
+        <div style="display: flex">
 
-        <input id="tab2" type="radio" name="tabs">
-        <label for="tab2" class="top_tracks">Top Music</label>
-
-        <input id="tab3" type="radio" name="tabs">
-        <label for="tab3" class="top_albums">Top album</label>
+                <button type="submit" class="artist">
+                    <input id="tab1" type="radio" name="tabs" checked>
+                    <label for="tab1 ">Artist</label>
+                </button>
 
 
-        <input id="tab4" type="radio" name="tabs">
-        <label for="tab4" class="similar" type="radio" name="tabs">Similar</label>
 
-        <input id="name_a" type="hidden" value="@Model.Name"/>
+            <form action="/Home/GetTopTracks" data-ajax="true" data-ajax-mode="replace" data-ajax-update="#tracks" id="form0" method="post">
+                <input type="hidden" name="name" value="@Model.Name" />
+                <button type="submit" class="tracks">
+                    <input id="tab2" type="radio" name="tabs">
+                    <label for="tab2" class="">Top Music</label>
+                </button>
+            </form>
 
-        <section id="content1">
+            <form action="/Home/GetTopAlbum" data-ajax="true" data-ajax-mode="replace" data-ajax-update="#albums" id="form0" method="post">
+                <input type="hidden" name="name" value="@Model.Name" />
+                <input type="hidden" name="page" value="1" />
+                <input type="hidden" name="count" value="24" />
+                <button type="submit" class="albums">
+                    <input id="tab3" type="radio" name="tabs">
+                    <label for="tab3" class="">Top album</label>
+                </button>
+            </form>
+
+            <form action="/Home/GetListSimilar" data-ajax="true" data-ajax-mode="replace" data-ajax-update="#content4" id="form0" method="post">
+                <input type="hidden" name="name" value="@Model.Name" />
+                <button type="submit" class="similar">
+                    <input id="tab4" type="radio" name="tabs">
+                    <label for="tab4" class="" type="radio" name="tabs">Similar</label>
+                </button>
+            </form>
+
+        </div>
+
+
+
+        <input id="name_a" type="hidden" value="@Model.Name" />
+
+        <section id="content1" class="div_artist">
             <h2 id="name" class="text-center">@Model.Name</h2>
             <div class="col-md-3">
                 <img class="photo-artist" src="@Model.Photo" style="width : 90%" />
@@ -35,18 +61,23 @@
                 <pre>@Model.Biography</pre>
             </div>
         </section>
-        <section id="content2">
-            <div class="tracks container"></div>
-        </section>
-        <section id="content3">
-            <div class="albums"></div>
-        </section>
-        <section id="content4" class="similar">
-            <div class="artist" style="margin-top: 50px"></div>
+
+        <section id="content2" class="div_tracks">
+            <div id="tracks"></div>
+
         </section>
 
+        <section id="content3" class="div_albums">
+            <div id="albums"></div>
+        </section>
+        <section id="content4" class="div_similar">
+            <div id="artist" style="margin-top: 50px"></div>
+        </section>
     </main>
-
-
 </body>
 
+<environment include="Development">
+    <script src="~/lib/jquery/dist/jquery.js"></script>
+    <script src="~/lib/jquery-ajax-unobtrusive/dist/jquery.unobtrusive-ajax.js"></script>
+    <script src="~/js/artist.js"></script>
+</environment>

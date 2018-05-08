@@ -1,0 +1,13 @@
+﻿@model List<TrackViewModel>
+
+<environment include="Development">
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
+</environment>
+
+
+@foreach (TrackViewModel data in Model)
+{
+    <div class="col-md-10" style="width: 100%">
+        <button class="text-left btn btn-dafault disable" style="width: 100%; margin: 3px;">@data.Name</button>
+    </div>
+}

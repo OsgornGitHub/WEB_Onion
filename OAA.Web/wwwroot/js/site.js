@@ -16,19 +16,10 @@ $(function () {
     }).on('page', function (event, page) {
         console.log(page);
         getTopArtistJson(page, count)
+
     });
 });
 
-
-function getCountPageTopArtist(count) {
-    $.ajax({
-        type: "GET",
-        url: "Home/GetCountPageTopArtist",
-        data: { page: 1, count: count },
-        dataType: "json",
-        success: function (data) { return data }
-    });
-}
 
 function getTopArtistJson(page, count) {
     $.ajax({
@@ -67,17 +58,6 @@ function loadData(data) {
         }
     }
 }
-
-function getSimilar(name) {
-    $.ajax({
-        type: "GET",
-        url: "/Home/GetListSimilar",
-        data: { name: name },
-        dataType: "json",
-        success: function (data) { loadData(data, isSimilar); }
-    });
-}
-
 
 
 $(document).ready(function () {
@@ -125,13 +105,6 @@ $(document).ready(function () {
             }
         }
     }
-
-    $('.similar').click(function () {
-        var name = document.getElementById('name').innerText;
-        isSimilar = true;
-        getSimilar(name)
-        console.log(name);
-    })
 
 
     $('.12').click(function () {

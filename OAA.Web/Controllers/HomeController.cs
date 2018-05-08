@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using OAA.Cons;
 using OAA.Data;
 using OAA.Service.Interfaces;
 using OAA.Web.Models;
@@ -32,12 +28,10 @@ namespace OAA.Web.Controllers
             this._appEnvironment = appEnvironment;
         }
 
-        public IActionResult Index(int page = 1)
+        public IActionResult Index(int page = 1, int count = 24)
         {
             List<Artist> list = new List<Artist>();
-            var pageNum = page;
-            var count = 24;
-            list = artistService.GetNextPage(pageNum, count);
+            list = artistService.GetNextPage(page, count);
             return View(list);
         }
 
@@ -60,8 +54,8 @@ namespace OAA.Web.Controllers
         }
 
 
-        [HttpGet]
-        public IActionResult GetListSimilar(string name)
+        [HttpPost]
+        public PartialViewResult GetListSimilar(string name)
         {
             var nameForRequest = name.Replace(" ", "+");
             List<Similar> listSimilar = new List<Similar>();
@@ -78,7 +72,7 @@ namespace OAA.Web.Controllers
                     };
                     listModel.Add(modelSim);
                 }
-                return Ok(listModel);
+                return PartialView(listModel);
             }
             listSimilar = similarService.GetListSimilar(nameForRequest);
             foreach (Similar sim in listSimilar)
@@ -92,11 +86,11 @@ namespace OAA.Web.Controllers
                 };
                 listModel.Add(model);
             }
-            return Ok(listModel);
+            return PartialView(listModel);
         }
 
-        [HttpGet]
-        public IActionResult GetTopAlbum(string name, int page, int count)
+        [HttpPost]
+        public PartialViewResult GetTopAlbum(string name, int page, int count)
         {
             List<Album> topAlbums = new List<Album>();
             List<AlbumViewModel> listModel = new List<AlbumViewModel>();
@@ -135,13 +129,24 @@ namespace OAA.Web.Controllers
                 }
 
             }
-            return Ok(listModel);
+            return PartialView(listModel);
         }
 
-        public List<Track> GetTopTracks(string name, int count = 24, int page = 1)
+        [HttpPost]
+        public PartialViewResult GetTopTracks(string name, int count = 24, int page = 1)
         {
             var nameForRequest = name.Replace(" ", "+");
-            return trackService.GetTopTracks(nameForRequest, count, page);
+            List<Track> tracks = trackService.GetTopTracks(nameForRequest, count, page);
+            List<TrackViewModel> listTrack = new List<TrackViewModel>();
+            foreach(var tr in tracks)
+            {
+                var model = new TrackViewModel()
+                {
+                    Name = tr.Name
+                };
+                listTrack.Add(model);
+            }
+            return PartialView(listTrack);
         }
 
 

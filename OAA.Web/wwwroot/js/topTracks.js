@@ -25,13 +25,7 @@ function loadTracks(data) {
                     </div>
 
             `;
-            if (data[i].link !== null) {
-                markup += `
-                        <div class="col-md-2">
-                                <a href=${data[i].link}><h5 class="text-center" style="cursor: pointer">Download<span  class="glyphicon glyphicon-floppy-disk"></span></h5></a>
-                        </div>
-                    `
-            }
+
             container.append(markup);
 
         }

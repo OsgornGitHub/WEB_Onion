@@ -1,0 +1,15 @@
+﻿@model List<OAA.Web.Models.AlbumViewModel>
+
+<environment include="Development">
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
+</environment>
+
+@foreach (var data in Model)
+{
+    <a href="/Home/GetAlbum?nameAlbum=@data.NameAlbum&nameArtist=@data.NameArtist">
+        <div class="col-md-2" style="height: 350px; margin: 0px; padding: 0px;">
+            <img src="@data.Cover" style="width: 100%" />
+            <h4 class="text-center" style="margin-bottom: 15px">@data.NameAlbum</h4>
+        </div>
+    </a>
+}

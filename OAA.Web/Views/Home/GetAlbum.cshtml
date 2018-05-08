@@ -35,17 +35,7 @@
                 }
                 <input type="hidden" value="@track.Id" />
             </div>
-            @using (Html.BeginForm("AddFile", "Home", FormMethod.Post, new { enctype = "multipart/form-data" }))
-            {
-                <div class="@track.Id invis">
-                    <input type="hidden" value="@track.Id" name="Id" />
-                    <input type="hidden" value="@track.Name" name="Name" />
-                    <input type="hidden" value="@track.AlbumId" name="AlbumId" />
-                    <input type="file" name="File" /><br>
-                    <input type="submit" value="Загрузить" />
-                </div>
 
-            }
         }
 
     </div>
