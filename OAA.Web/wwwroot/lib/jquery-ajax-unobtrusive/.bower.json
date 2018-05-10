@@ -10,6 +10,5 @@
   },
   "_source": "https://github.com/aspnet/jquery-ajax-unobtrusive.git",
   "_target": "v3.2.5",
-  "_originalSource": "jquery-ajax-unobtrusive",
-  "_direct": true
+  "_originalSource": "jquery-ajax-unobtrusive"
 }

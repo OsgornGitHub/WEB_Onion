@@ -13,14 +13,35 @@
     <main>
         <div style="display: flex">
 
-                <button type="submit" class="artist">
-                    <input id="tab1" type="radio" name="tabs" checked>
-                    <label for="tab1 ">Artist</label>
+            <button type="submit" class="artist">
+                <input id="tab1" type="radio" name="tabs" checked>
+                <label for="tab1 ">Artist</label>
+            </button>
+
+            @*@using (Html.BeginForm("GetTopTracks", "Home", FormMethod.Post, new { UpdateTargetId = "tracks", DataAjax="true", DataAjaxMode="replace" }))
+            {
+                @Html.AntiForgeryToken()
+                <input type="hidden" name="name" value="@Model.Name" />
+                <button type="submit" class="tracks">
+                    <input id="tab2" type="radio" name="tabs">
+                    <label for="tab2" class="">Top Music</label>
                 </button>
+            }*@
+
+            @*@using (Html.BeginForm("GetTopAlbum", new
+                {
+                    encType = "multipart/form-data",
+                    UpdateTargetId = "results",
+                    data - ajax = "true",
+                    data - ajax - mode = "replace"
+                }))
+                {
+                    <input type="text" name="name" />
+                    <input type="submit" value="Поиск" />
+                }*@
 
 
-
-            <form action="/Home/GetTopTracks" data-ajax="true" data-ajax-mode="replace" data-ajax-update="#tracks" id="form0" method="post">
+            <form asp-controller="Home" asp-action="GetTopTracks" data-ajax="true" data-ajax-mode="replace" data-ajax-update="#tracks" method="post">
                 <input type="hidden" name="name" value="@Model.Name" />
                 <button type="submit" class="tracks">
                     <input id="tab2" type="radio" name="tabs">
@@ -28,7 +49,7 @@
                 </button>
             </form>
 
-            <form action="/Home/GetTopAlbum" data-ajax="true" data-ajax-mode="replace" data-ajax-update="#albums" id="form0" method="post">
+            <form asp-controller="Home" asp-action="GetTopAlbum" data-ajax="true" data-ajax-mode="replace" data-ajax-update="#albums" method="post">
                 <input type="hidden" name="name" value="@Model.Name" />
                 <input type="hidden" name="page" value="1" />
                 <input type="hidden" name="count" value="24" />
@@ -38,7 +59,7 @@
                 </button>
             </form>
 
-            <form action="/Home/GetListSimilar" data-ajax="true" data-ajax-mode="replace" data-ajax-update="#content4" id="form0" method="post">
+            <form asp-controller="Home" asp-action="GetListSimilar" data-ajax="true" data-ajax-mode="replace" data-ajax-update="#content4" method="post">
                 <input type="hidden" name="name" value="@Model.Name" />
                 <button type="submit" class="similar">
                     <input id="tab4" type="radio" name="tabs">

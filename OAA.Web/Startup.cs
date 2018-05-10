@@ -24,8 +24,6 @@ namespace OAA.Web
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-
-            services.AddMvc();
             services.AddTransient<IUnitOfWork, UnitOfWork>();
             services.AddDbContext<ApplicationContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"), b => b.MigrationsAssembly("OAA.Data")));
             services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
@@ -33,6 +31,10 @@ namespace OAA.Web
             services.AddTransient<IAlbumService, AlbumService>();
             services.AddTransient<ITrackService, TrackService>();
             services.AddTransient<ISimilarService, SimilarService>();
+
+            services.AddMvc();
+
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
